@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+.loyout-container {
+  background: #f5f6fa 0% 0% no-repeat padding-box;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.sideBar {
+  width: 25%;
+  padding: 20px;
+}

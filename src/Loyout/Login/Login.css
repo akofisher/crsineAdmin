@@ -1,0 +1,57 @@
+.login-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.login-form {
+    margin-top: 50px;
+    width: 90%;
+    height: 500px;
+    background: #F5F6FA 0% 0% no-repeat padding-box;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.inp-cont {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.label {
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+input[type=text],
+input[type=password],
+input[type=tel] {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 200px;
+    align-self: center;
+}
+
+.recovery-link {
+    text-decoration: underline;
+    font-size: 16px;
+}
+
+.submit-btn {
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    padding: 5px 8px;
+    cursor: pointer;
+}

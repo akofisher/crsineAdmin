@@ -1,0 +1,11 @@
+.recovery-history-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.recovery-link-sec {
+    text-decoration: underline;
+    font-size: 16px;
+    align-self: flex-start;
+}

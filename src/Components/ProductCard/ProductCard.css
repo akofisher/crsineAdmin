@@ -1,0 +1,144 @@
+.ProductCard {
+  width: 80%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.ProductImage {
+  object-fit: fill;
+  min-width: 30%;
+  max-width: 30%;
+  height: 90%;
+  border-radius: 8px;
+}
+
+.MoreIcon {
+  object-fit: fill;
+  min-width: 16px;
+  max-width: 16px;
+  height: 16px;
+  background-color: transparent;
+  position: absolute;
+  right: -3px;
+  top: -3px;
+}
+
+.ProductPriceOnSale {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  text-decoration: line-through;
+  color: #000000;
+}
+
+.ProductPrice {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #000000;
+}
+
+.ProductProduction {
+  border-top: 1px solid gray;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #000000;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.ProductSalePrice {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #dd2727;
+}
+
+.ProductTexts {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  overflow: hidden;
+  color: #000000;
+}
+
+.ProductName {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000000;
+}
+
+.ProductDescription {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  color: #000000;
+  line-height: 12px;
+  max-height: 12px;
+  overflow: hidden;
+}
+
+.ProductContainerOnShow {
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  border: none;
+  align-self: center;
+}
+
+.ProductTextsContainerOnShow {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ProductPricesContainerOnShow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.ProductImageOnSingl {
+  object-fit: fill;
+  min-width: 80%;
+  max-width: 80%;
+  height: 90%;
+  border-radius: 8px;
+}
+
+.ProductsPriceOnSaleSingl {
+  text-decoration: line-through;
+}
+
+.ProductSalePriceSingl {
+  color: #dd2727;
+}
+
+.delete-btn2 {
+  position: absolute;
+  right: -55px;
+  border: none;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+  padding: 3px;
+  cursor: pointer;
+}
