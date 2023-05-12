@@ -1,23 +1,9 @@
 .header-container {
-    width: 100%;
-    height: 70px;
-    border: 1px solid black;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-}
-
-.nav-links {
-    padding: 0px !important;
-    margin: 0px !important;
-    font-size: 14px;
-}
-
-.active-nav-links {
-    padding: 0px !important;
-    margin: 0px !important;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: underline;
+  width: 100%;
+  height: 120px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
 }

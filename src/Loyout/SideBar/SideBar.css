@@ -1,0 +1,13 @@
+.nav-links {
+  padding: 0px !important;
+  margin: 10px !important;
+  font-size: 14px;
+}
+
+.active-nav-links {
+  padding: 0px !important;
+  margin: 10px !important;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+}

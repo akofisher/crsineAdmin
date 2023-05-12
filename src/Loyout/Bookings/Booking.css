@@ -1,0 +1,37 @@
+.booking_card {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px;
+  margin-top: 15px;
+}
+.flexible_head {
+  display: flex;
+  justify-content: space-around;
+  height: 30px;
+}
+.services_container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: 1px solid gray;
+  padding: 5px;
+  flex-direction: row;
+}
+
+.detail_container {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid gray;
+  padding: 5px;
+  justify-content: space-between;
+}
+/* .detail_name {
+} */
+.detail {
+  width: 60%;
+  font-weight: 700;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+}
