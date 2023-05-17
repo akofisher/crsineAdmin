@@ -23,17 +23,6 @@ export default function BookingTimes() {
     <Loyout>
       <div className="bookingtime_container">
         <div className="left_bookingtime_container">
-          <p className="dates_header_text">თავისუფალი დროები</p>
-          <div className="open_dates">
-            {DateAndTime.map((val, idx) => {
-              return (
-                <div className="date_card" key={idx}>
-                  <p className="date">{val.date}</p>
-                  <button className="date_deletion">წაშლა</button>
-                </div>
-              )
-            })}
-          </div>
           <p className="dates_header_text">დაჯავშნილი დროები</p>
           <div className="booked_dates">
             {DateAndTime.map((val, idx) => {
@@ -57,6 +46,17 @@ export default function BookingTimes() {
             დამატება
           </button>
           <p>{date ? date : null}</p>
+          <p className="dates_header_text">თავისუფალი დროები</p>
+          <div className="open_dates">
+            {DateAndTime.map((val, idx) => {
+              return (
+                <div className="date_card" key={idx}>
+                  <p className="date">{val.date}</p>
+                  <button className="date_deletion">წაშლა</button>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </Loyout>

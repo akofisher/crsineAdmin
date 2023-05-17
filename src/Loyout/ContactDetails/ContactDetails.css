@@ -1,0 +1,65 @@
+.contact_main_container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.contact_left_container {
+  width: 60%;
+  height: 100%;
+  border: 1px solid black;
+}
+.contact_right_container {
+  width: 40%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.contact_container_header {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.rows {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 30px;
+  border: 1px solid black;
+  margin: 35px 0px;
+  padding: 0px 10px;
+  align-items: center;
+}
+
+.contact_title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.brandLogo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.contact-inp-cont {
+  width: 100%;
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
