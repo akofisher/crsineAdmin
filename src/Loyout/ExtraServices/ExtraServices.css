@@ -1,0 +1,42 @@
+.extra_services_container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+}
+.extra_card {
+  width: 90%;
+  padding: 5px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px auto;
+  align-items: center;
+  position: relative;
+  height: 50px;
+}
+
+.extra_services_left_ontainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 700px;
+  border: 1px solid black;
+  overflow-y: auto;
+}
+.extra_services_right_ontainer {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  border: 1px solid black;
+}
+
+.flexible {
+  display: flex;
+  width: 100%;
+}

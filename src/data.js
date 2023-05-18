@@ -67,6 +67,135 @@ export const BookingsData = [
   },
 ]
 
+export const WashPackages = [
+  'Hatchback',
+  'Sedan',
+  'Minivan',
+  'Microbus',
+  'Jeep',
+  'Suv',
+]
+
+export const CarPackages = [
+  {
+    packageName: 'Basic',
+    packagePrice: '$20.99',
+    packageTime: '20min',
+    id: 1,
+  },
+  {
+    packageName: 'Intermediate',
+    packagePrice: '$40.99',
+    packageTime: '40min',
+    id: 2,
+  },
+  {
+    packageName: 'Pro',
+    packagePrice: '$60.99',
+    packageTime: '60min',
+    id: 3,
+  },
+]
+
+export const ExtraServicesOfCar = [
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+  {
+    extraName: 'Tire Shine',
+    extraTime: '5min',
+    extraPrice: '$5.99',
+    id: 1,
+  },
+]
+
 export const DateAndTime = [
   {
     date: '20 Jan, 16:35',

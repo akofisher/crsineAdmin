@@ -8,11 +8,14 @@
 }
 .left_bookingtime_container,
 .right_bookingtime_container {
-  width: 50%;
-  height: 100%;
-  border: 1px solid black;
   padding: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 800px;
+  border: 1px solid black;
+  overflow-y: auto;
 }
 
 .date_card {
