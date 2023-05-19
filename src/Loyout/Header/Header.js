@@ -6,13 +6,13 @@ export default function Header() {
   return (
     <div className="header-container">
       <button
-        className="submit-btn"
+        className="logout-btn"
         onClick={() => {
           eraseCookie('user')
           window.location.reload()
         }}
       >
-        LOG OUT
+        გასვლა
       </button>
     </div>
   )

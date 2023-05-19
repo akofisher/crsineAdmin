@@ -7,12 +7,10 @@
 .contact_left_container {
   width: 60%;
   height: 100%;
-  border: 1px solid black;
 }
 .contact_right_container {
   width: 40%;
   height: 100%;
-  border: 1px solid black;
 }
 
 .contact_container_header {
@@ -28,10 +26,11 @@
   justify-content: space-between;
   width: 100%;
   min-height: 30px;
-  border: 1px solid black;
+  background-color: white;
   margin: 35px 0px;
   padding: 0px 10px;
   align-items: center;
+  border-radius: 8px;
 }
 
 .contact_title {
