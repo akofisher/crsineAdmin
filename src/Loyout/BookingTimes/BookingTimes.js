@@ -22,7 +22,7 @@ export default function BookingTimes() {
   return (
     <Loyout>
       <div className="bookingtime_container">
-        <div className="left_bookingtime_container">
+        {/* <div className="left_bookingtime_container">
           <p className="dates_header_text">დაჯავშნილი დროები</p>
           <div className="booked_dates">
             {DateAndTime.map((val, idx) => {
@@ -34,7 +34,7 @@ export default function BookingTimes() {
               )
             })}
           </div>
-        </div>
+        </div> */}
         <div className="right_bookingtime_container">
           <DatePicker
             selected={startDate}

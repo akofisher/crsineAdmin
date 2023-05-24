@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getCookie, setCookie } from '../../Cookies'
-import { BOOKINGS, PASS_RECOVERY } from '../../routes'
+import { ACTIVE_BOOKINGS, PASS_RECOVERY } from '../../routes'
 import './Login.css'
 
 export default function Login() {
@@ -12,13 +12,13 @@ export default function Login() {
 
   useEffect(() => {
     if (USERR) {
-      nav(BOOKINGS)
+      nav(ACTIVE_BOOKINGS)
     }
   }, [USERR])
 
   const handleSubmit = () => {
     setCookie('user', user, 1)
-    nav(BOOKINGS)
+    nav(ACTIVE_BOOKINGS)
   }
 
   useEffect(() => {}, [user, password])

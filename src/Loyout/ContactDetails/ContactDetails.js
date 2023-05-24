@@ -17,11 +17,6 @@ export default function ContactDetails() {
               <p className="contact_detail">{contactDetails.brandName}</p>
             </div>
             <div className="rows">
-              <p className="contact_title">Brand Logo:</p>
-              <p className="contact_detail">{contactDetails.brandLogo}</p>
-              <img src={Logo} alt="Logo" className="brandLogo" />
-            </div>
-            <div className="rows">
               <p className="contact_title">Address:</p>
               <p className="contact_detail">{contactDetails.brandAddress}</p>
             </div>
@@ -40,6 +35,11 @@ export default function ContactDetails() {
             <div className="rows">
               <p className="contact_title">Facebook:</p>
               <p className="contact_detail">{contactDetails.facebook}</p>
+            </div>
+            <div className="rows">
+              <p className="contact_title">Brand Logo:</p>
+              <p className="contact_detail">{contactDetails.brandLogo}</p>
+              <img src={Logo} alt="Logo" className="brandLogo" />
             </div>
           </div>
           <div className="contact_right_container">
@@ -129,7 +129,11 @@ export default function ContactDetails() {
                   className="user-input"
                 />
               </div>
-              <div className="contact-inp-cont">
+
+              <button className="submit-btn" type="submit">
+                შეცვლა
+              </button>
+              <div className="contact-inp-cont-logo">
                 <label className="label" htmlFor="password">
                   ატვირთეთ ლოგოს ფოტო
                 </label>
@@ -142,10 +146,11 @@ export default function ContactDetails() {
                   label="მომხმარებელი"
                   className="user-input"
                 />
+
+                <button className="submit-btn" type="button">
+                  ლოგოს დამატება
+                </button>
               </div>
-              <button className="submit-btn" type="submit">
-                შეცვლა
-              </button>
             </form>
           </div>
         </div>

@@ -11,7 +11,8 @@
   margin-top: 50px;
   width: 90%;
   height: 500px;
-  background-image: linear-gradient(#d8cfd0, #b1a6a4);
+  background-image: url('../../Img/background.jpg');
+  background-position: center;
   padding: 20px;
   border-radius: 15px;
   display: flex;
@@ -31,6 +32,7 @@
   text-align: center;
   padding-bottom: 15px;
   white-space: nowrap;
+  color: white;
 }
 
 input[type='text'],
@@ -46,6 +48,7 @@ input[type='tel'] {
 .recovery-link {
   text-decoration: underline;
   font-size: 16px;
+  color: white;
 }
 
 .submit-btn {

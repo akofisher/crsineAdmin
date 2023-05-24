@@ -1,11 +1,12 @@
 .recovery-history-line {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .recovery-link-sec {
-    text-decoration: underline;
-    font-size: 16px;
-    align-self: flex-start;
+  text-decoration: underline;
+  font-size: 16px;
+  align-self: flex-start;
+  color: white;
 }

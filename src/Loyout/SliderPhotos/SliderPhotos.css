@@ -1,0 +1,31 @@
+.left_slider_container,
+.right_slider_container {
+  width: 50%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.flexible_slider_contianer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.photos_container {
+  margin: 20px auto;
+  width: 80%;
+}
+
+.slider_img {
+  position: relative;
+  margin: 15px auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+}
+
+.delete_slider_btn {
+  position: absolute;
+  bottom: -25px;
+  right: -10px;
+}

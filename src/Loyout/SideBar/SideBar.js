@@ -2,13 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {
   ABOUT_DETAILS,
-  BOOKINGS,
+  ACTIVE_BOOKINGS,
   BOOKING_TIMES,
+  CANCELED_BOOKINGS,
   CONTACT_DETAILS,
+  DONE_BOOKINGS,
   NEWS_DETAILS,
   PACKAGES,
+  PROCESS_BOOKINGS,
   SERVICES,
   SERVICES_DETAILS,
+  SLIDER_PHOTOS,
 } from '../../routes'
 import './SideBar.css'
 
@@ -17,13 +21,26 @@ export default function SideBar() {
     <div className="sideBar">
       <Link
         className={
-          window.location.pathname == BOOKINGS
+          window.location.pathname == ACTIVE_BOOKINGS ||
+          window.location.pathname == PROCESS_BOOKINGS ||
+          window.location.pathname == DONE_BOOKINGS ||
+          window.location.pathname == CANCELED_BOOKINGS
             ? 'active-nav-links'
             : 'nav-links'
         }
-        to={BOOKINGS}
+        to={ACTIVE_BOOKINGS}
       >
         ჯავშნები
+      </Link>
+      <Link
+        className={
+          window.location.pathname == SLIDER_PHOTOS
+            ? 'active-nav-links'
+            : 'nav-links'
+        }
+        to={SLIDER_PHOTOS}
+      >
+        სლაიდერის ფოტოები
       </Link>
       <Link
         className={

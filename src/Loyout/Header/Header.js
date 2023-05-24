@@ -12,7 +12,7 @@ export default function Header() {
           window.location.reload()
         }}
       >
-        გასვლა
+        სისტემიდან გასვლა
       </button>
     </div>
   )

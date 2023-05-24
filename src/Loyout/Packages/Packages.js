@@ -53,6 +53,20 @@ export default function Packages() {
             <form onSubmit={() => handleSubmit()} className="packages-form">
               <div className="contact-inp-cont">
                 <label className="label" htmlFor="userName">
+                  ჩაწერეთ პაკეტის სახელი
+                </label>
+                <input
+                  id="userName"
+                  name="userName"
+                  type="text"
+                  onChange={(val) => console.log()}
+                  variant="outlined"
+                  label="მომხმარებელი"
+                  className="user-input"
+                />
+              </div>
+              <div className="contact-inp-cont">
+                <label className="label" htmlFor="userName">
                   ჩაწერეთ პაკეტის ფასი
                 </label>
                 <input

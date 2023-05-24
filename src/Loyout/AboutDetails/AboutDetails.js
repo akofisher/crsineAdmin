@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../../Img/restLogo.jpg'
-import { aboutDetails, bannerPhoto, sliderBannerPhoto } from '../../data'
+import { aboutDetails, bannerPhoto } from '../../data'
 import Loyout from '../Loyout'
 import './AboutDetails.css'
 
@@ -27,11 +27,7 @@ export default function AboutDetails() {
               <p className="contact_detail">{aboutDetails.aboutImgOne}</p>
               <img src={Logo} alt="Logo" className="brandLogo" />
             </div>
-            <div className="rows">
-              <p className="contact_title">სლაიდერის ბანერი:</p>
-              <p className="contact_detail">{sliderBannerPhoto.image}</p>
-              <img src={Logo} alt="Logo" className="brandLogo" />
-            </div>
+
             <div className="rows">
               <p className="contact_title">ფეიჯების ბანერი:</p>
               <p className="contact_detail">{bannerPhoto.pagesBanner}</p>
@@ -83,20 +79,7 @@ export default function AboutDetails() {
                   className="user-input"
                 />
               </div>
-              <div className="contact-inp-cont">
-                <label className="label" htmlFor="password">
-                  ატვირთეთ სლაიდერის ბანერი
-                </label>
-                <input
-                  id="userName"
-                  name="userName"
-                  type="file"
-                  onChange={(val) => console.log()}
-                  variant="outlined"
-                  label="მომხმარებელი"
-                  className="user-input"
-                />
-              </div>
+
               <div className="contact-inp-cont">
                 <label className="label" htmlFor="password">
                   ატვირთეთ ფეიჯების ბანერი

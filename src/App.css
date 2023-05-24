@@ -3,7 +3,9 @@
 }
 
 .loyout-container {
-  background-image: linear-gradient(#d8cfd0, #b1a6a4);
+  /* background-image: linear-gradient(#d8cfd0, #b1a6a4); */
+  background-image: url('../src/Img/background.jpg');
+  background-position: center;
 }
 
 .container {
@@ -12,8 +14,9 @@
 }
 
 .sideBar {
-  width: 25%;
+  width: 280px;
   padding: 20px;
+  background-color: transparent;
 }
 
 .page_container {
@@ -22,6 +25,14 @@
   max-height: 750px;
   padding: 20px;
   overflow-y: auto;
-  background-color: #f2f1ef;
-  border-radius: 8px;
+  background-color: #6474e5;
+}
+
+::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
 }
