@@ -21,12 +21,12 @@ export default function Login() {
     nav(ACTIVE_BOOKINGS)
   }
 
-  useEffect(() => {}, [user, password])
+  useEffect(() => { }, [user, password])
 
   return (
     <div className="login-container">
       <form onSubmit={() => handleSubmit()} className="login-form">
-        <p>სისტემაში შესვლა</p>
+        <p className='login_header_text'>სისტემაში შესვლა</p>
         <div className="inp-cont">
           <label className="label" htmlFor="userName">
             შეიყვანეთ მომხმარებელი

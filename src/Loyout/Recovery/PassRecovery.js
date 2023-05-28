@@ -23,7 +23,7 @@ export default function PassRecovery() {
           უკან დაბრუნება
         </Link>
         <div className="recovery-history-line">
-          <p className="recovery-head-text">პაროლის აღდგენა</p>
+          <p className='login_header_text'>პაროლის აღდგენა</p>
         </div>
         <div className="inp-cont">
           <label className="label" htmlFor="userName">

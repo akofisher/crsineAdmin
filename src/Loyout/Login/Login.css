@@ -10,7 +10,7 @@
 .login-form {
   margin-top: 50px;
   width: 90%;
-  height: 500px;
+  height: 600px;
   background-image: url('../../Img/background.jpg');
   background-position: center;
   padding: 20px;
@@ -58,4 +58,12 @@ input[type='tel'] {
   color: black;
   padding: 5px 8px;
   cursor: pointer;
+}
+
+
+.login_header_text {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
