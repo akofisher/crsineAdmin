@@ -11,7 +11,7 @@ export default function ProcessBookings() {
     <Booking>
       {sortedArray.map((val, idx) => {
         return (
-          <div className="booking_card">
+          <div className="booking_card" key={idx}>
             <div className="bookings_buttons_container">
               <button
                 onClick={() => console.log('ok')}
@@ -54,7 +54,7 @@ export default function ProcessBookings() {
                 {' '}
                 {val.extraService.map((val, idx) => {
                   return (
-                    <p className="services">
+                    <p className="services" key={idx}>
                       {idx + 1} - {val}
                     </p>
                   )

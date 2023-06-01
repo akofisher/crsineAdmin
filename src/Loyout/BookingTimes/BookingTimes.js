@@ -1,7 +1,12 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useDispatch } from 'react-redux'
+import { API } from '../../API'
+import { getCookie } from '../../Cookies'
+import { setTimes } from '../../Store/CarWash/CarWashActCreat'
 import { DateAndTime } from '../../data'
+import api from '../../useApiCall'
 import Loyout from '../Loyout'
 import './BookingTimes.css'
 
@@ -10,6 +15,86 @@ import './BookingTimes.css'
 export default function BookingTimes() {
   const [startDate, setStartDate] = useState(new Date())
   const [date, setDate] = useState('')
+  const dispatch = useDispatch()
+  const [error, setError] = useState('')
+  const token = getCookie('token')
+  const uid = getCookie('uid')
+
+  const fetchTime = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'GetTimeList',
+          controller: 'Services',
+          // pars: { TYPE_ID: '1' },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      dispatch(setTimes(responseData.data))
+      console.log(responseData.data, 'Times')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+  const addTime = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'AddTime',
+          controller: 'Admin',
+          pars: { FREE_TIME: 12312321312, TOKEN: token, ADMIN_ID: uid },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      // dispatch(setTimes(responseData.data))
+      console.log(responseData.data, 'Times2')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  const editTime = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'EditTime',
+          controller: 'Admin',
+          pars: {
+            FREE_TIME: 12312321312,
+            TOKEN: token,
+            ADMIN_ID: uid,
+            TIME_ID: 0,
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      // dispatch(setTimes(responseData.data))
+      console.log(responseData.data, 'Times3')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchTime()
+    addTime()
+    editTime()
+  }, [])
 
   const PickADate = useCallback((val) => {
     let i = ' '

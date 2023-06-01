@@ -1,0 +1,7 @@
+export const SET_ABOUT = 'SET_ABOUT'
+export const SET_TIMES = 'SET_TIMES'
+export const SET_CAR_TYPES = 'SET_CAR_TYPES'
+export const SET_PACKETS = 'SET_PACKETS'
+export const SET_SUB_PACKETS = 'SET_SUB_PACKETS'
+export const SET_SERVICES = 'SET_SERVICES'
+export const REMOVE_ADDRESS = 'REMOVE_ADDRESS'

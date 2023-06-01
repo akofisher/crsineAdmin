@@ -1,13 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { API } from '../../API'
 import Delete from '../../Img/delete.png'
 import Edit from '../../Img/edit.png'
 import SomePhoto from '../../Img/restLogo.jpg'
+import { setServices } from '../../Store/CarWash/CarWashActCreat'
 import { serviceDetails } from '../../data'
+import api from '../../useApiCall'
 import Loyout from '../Loyout'
 import './ServicesDetails.css'
 
 export default function ServicesDetails() {
   const handleSubmit = () => {}
+  const dispatch = useDispatch()
+  const [error, setError] = useState('')
+
+  const fetchServiceList = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'GetServiceList',
+          controller: 'Services',
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      dispatch(setServices(responseData.data))
+      console.log(responseData.data, 'Services')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchServiceList()
+  }, [])
   return (
     <Loyout>
       <div className="page_container">

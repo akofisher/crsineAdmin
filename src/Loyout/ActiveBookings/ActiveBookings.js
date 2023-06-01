@@ -7,11 +7,50 @@ export default function ActiveBookings() {
   const mappedArray = arr.map((num, index) => ({ num, index }))
   mappedArray.sort((a, b) => b.index - a.index)
   const sortedArray = mappedArray.map((item) => item.num)
+  // const token = getCookie('token')
+  // const uid = getCookie('uid')
+  // const [error, setError] = useState('')
+
+  // const getOrder = async () => {
+  //   try {
+  //     const url = API
+  //     const options = {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         ApiMethod: 'GetOrderList',
+  //         controller: 'Admin',
+  //         pars: {
+  //           TOKEN: token,
+  //           ADMIN_ID: uid,
+  //         },
+  //       }),
+  //     }
+  //     const responseData = await api.fetchData(url, options)
+  //     // dispatch(setSubPackets(responseData.data))
+  //     // localStorage.setItem(responseData, 'DATA')
+  //     console.log(responseData, 'Sub Packets')
+  //     if (responseData.status == 'success') {
+  //       console.log(responseData, 'DATA')
+  //     } else {
+  //       alert('მონაცემები არასწორია')
+  //     }
+  //   } catch (error) {
+  //     setError(error.message)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getOrder()
+  // }, [])
+
   return (
     <Booking>
       {sortedArray.map((val, idx) => {
         return (
-          <div className="booking_card">
+          <div className="booking_card" key={idx}>
             <div className="bookings_buttons_container">
               <button
                 onClick={() => console.log('ok')}
@@ -53,7 +92,7 @@ export default function ActiveBookings() {
                 {' '}
                 {val.extraService.map((val, idx) => {
                   return (
-                    <p className="services">
+                    <p className="services" key={idx}>
                       {idx + 1} - {val}
                     </p>
                   )

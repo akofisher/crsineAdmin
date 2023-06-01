@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { getCookie } from './Cookies.js'
 
-
-
-
-
 const PrivateRoute = ({ children, redirectTo }) => {
+  const STAFF = getCookie('staff')
+  const STATUS = getCookie('status')
+  const TOKEN = getCookie('token')
+  const UID = getCookie('uid')
   const USER = getCookie('user')
-
-
 
   // useEffect(() => {
   //   fetch(API, {
@@ -40,10 +38,7 @@ const PrivateRoute = ({ children, redirectTo }) => {
   //   })
   // }, [])
 
-
-
-  return (USER ? children : <Navigate to={redirectTo} />
-  )
+  return STATUS && TOKEN && USER ? children : <Navigate to={redirectTo} />
 }
 
 export default PrivateRoute

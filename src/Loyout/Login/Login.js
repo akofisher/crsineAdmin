@@ -1,31 +1,83 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { API } from '../../API'
 import { getCookie, setCookie } from '../../Cookies'
-import { ACTIVE_BOOKINGS, PASS_RECOVERY } from '../../routes'
+import { ACTIVE_BOOKINGS } from '../../routes'
+import api from '../../useApiCall'
 import './Login.css'
 
 export default function Login() {
   const nav = useNavigate()
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
-  const USERR = getCookie('user')
+  const STATUS = getCookie('status')
+  const [error, setError] = useState('')
+
+  const adminLogin = async (us, pass) => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'AdminLogin',
+          controller: 'Admin',
+          pars: {
+            USER_NAME: us,
+            USER_PASS: pass,
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      // dispatch(setSubPackets(responseData.data))
+      // localStorage.setItem(responseData, 'DATA')
+      console.log(responseData, 'Sub Packets')
+      if (responseData.status == 'success') {
+        loginSucces(responseData.data)
+      } else {
+        alert('მონაცემები არასწორია')
+      }
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  const loginSucces = (data) => {
+    setCookie('staff', data.STAFF_NAME, 365)
+    setCookie('status', data.STATUS, 365)
+    setCookie('token', data.TOKEN, 365)
+    setCookie('uid', data.UID, 365)
+    setCookie('user', data.USER_NAME, 365)
+    nav(ACTIVE_BOOKINGS)
+  }
 
   useEffect(() => {
-    if (USERR) {
+    if (STATUS == 1) {
       nav(ACTIVE_BOOKINGS)
     }
-  }, [USERR])
+  }, [STATUS])
 
   const handleSubmit = () => {
-    setCookie('user', user, 1)
-    nav(ACTIVE_BOOKINGS)
+    // setCookie('user', user, 1)
+    // nav(ACTIVE_BOOKINGS)
+    // localStorage.setItem(JSON.stringify(e), 'DATA')
+    // adminLogin(user, password)
   }
 
   useEffect(() => {}, [user, password])
 
   return (
     <div className="login-container">
-      <form onSubmit={() => handleSubmit()} className="login-form">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          adminLogin(user, password)
+          // handleSubmit()
+        }}
+        className="login-form"
+      >
         <p>სისტემაში შესვლა</p>
         <div className="inp-cont">
           <label className="label" htmlFor="userName">
@@ -60,9 +112,9 @@ export default function Login() {
         <button className="submit-btn" type="submit">
           შესვლა
         </button>
-        <Link className="recovery-link" to={PASS_RECOVERY}>
+        {/* <Link className="recovery-link" to={PASS_RECOVERY}>
           პაროლის აღდგენა
-        </Link>
+        </Link> */}
       </form>
     </div>
   )

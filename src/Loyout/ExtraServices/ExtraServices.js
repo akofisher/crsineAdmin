@@ -1,13 +1,67 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useDispatch } from 'react-redux'
+import { API } from '../../API'
 import Delete from '../../Img/delete.png'
 import Edit from '../../Img/edit.png'
+import { setCarTypes, setSubPackets } from '../../Store/CarWash/CarWashActCreat'
 import { ExtraServicesOfCar, WashPackages } from '../../data'
+import api from '../../useApiCall'
 import Loyout from '../Loyout'
 import './ExtraServices.css'
 
 export default function ExtraServices() {
   const handleSubmit = () => {}
+  const dispatch = useDispatch()
+  const [error, setError] = useState('')
+
+  const fetchCarTypes = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'GetCarTypes',
+          controller: 'Services',
+          // pars: { TYPE_ID: '1' },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      dispatch(setCarTypes(responseData.data))
+      console.log(responseData.data, 'Car Types')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+  const fetchSubPackets = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'GetSubPackets',
+          controller: 'Services',
+          pars: { TYPE_ID: '1' },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      dispatch(setSubPackets(responseData.data))
+      console.log(responseData.data, 'Sub Packets')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchSubPackets()
+    fetchCarTypes()
+  }, [])
   return (
     <Loyout>
       <div className="extra_services_container">

@@ -8,6 +8,10 @@ export default function Header() {
       <button
         className="logout-btn"
         onClick={() => {
+          eraseCookie('staff')
+          eraseCookie('status')
+          eraseCookie('token')
+          eraseCookie('uid')
           eraseCookie('user')
           window.location.reload()
         }}
