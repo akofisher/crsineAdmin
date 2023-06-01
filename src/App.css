@@ -21,8 +21,8 @@
 
 .page_container {
   width: 100%;
-  min-height: 750px;
-  max-height: 750px;
+  min-height: 680px;
+  max-height: 680px;
   padding: 20px;
   overflow-y: auto;
   background-color: #6474e5;

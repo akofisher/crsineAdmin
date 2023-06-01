@@ -1,12 +1,13 @@
 .bookingtime_container {
   width: 100%;
-  min-height: 750px;
-  max-height: 750px;
+  min-height: 680px;
+  max-height: 680px;
   background-color: transparent;
   padding: 20px;
   display: flex;
   background-color: #6474e5;
 }
+
 .left_bookingtime_container,
 .right_bookingtime_container {
   padding: 10px;
@@ -37,6 +38,7 @@
   padding: 6px;
   border-radius: 8px;
 }
+
 .date_deletion:hover {
   cursor: pointer;
   background-color: gray;
@@ -48,6 +50,7 @@
   overflow-y: scroll;
   margin: 20px auto;
 }
+
 .booked_dates {
   width: 100%;
   height: 90%;
