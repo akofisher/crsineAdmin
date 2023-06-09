@@ -1,53 +1,99 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { API } from '../../API'
+import { getCookie } from '../../Cookies'
 import { BookingsData } from '../../data'
+import api from '../../useApiCall'
 import Booking from '../Bookings/Booking'
+import DatePicker from 'react-datepicker'
 
 export default function ActiveBookings() {
   const arr = BookingsData
   const mappedArray = arr.map((num, index) => ({ num, index }))
   mappedArray.sort((a, b) => b.index - a.index)
   const sortedArray = mappedArray.map((item) => item.num)
-  // const token = getCookie('token')
-  // const uid = getCookie('uid')
-  // const [error, setError] = useState('')
+  const token = getCookie('token')
+  const uid = getCookie('uid')
+  const [error, setError] = useState('')
+  const [startDaten, setStartDate] = useState(new Date())
 
-  // const getOrder = async () => {
-  //   try {
-  //     const url = API
-  //     const options = {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         ApiMethod: 'GetOrderList',
-  //         controller: 'Admin',
-  //         pars: {
-  //           TOKEN: token,
-  //           ADMIN_ID: uid,
-  //         },
-  //       }),
-  //     }
-  //     const responseData = await api.fetchData(url, options)
-  //     // dispatch(setSubPackets(responseData.data))
-  //     // localStorage.setItem(responseData, 'DATA')
-  //     console.log(responseData, 'Sub Packets')
-  //     if (responseData.status == 'success') {
-  //       console.log(responseData, 'DATA')
-  //     } else {
-  //       alert('მონაცემები არასწორია')
-  //     }
-  //   } catch (error) {
-  //     setError(error.message)
-  //   }
-  // }
 
-  // useEffect(() => {
-  //   getOrder()
-  // }, [])
+
+
+
+  // const currentTime = new Date();
+  // const hours = currentTime.getHours().toString().padStart(2, '0');
+  // const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+  // const seconds = currentTime.getSeconds().toString().padStart(2, '0');
+  // const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+  // const timestamp = currentTime.getTime();
+
+  // console.log(timestamp, formattedTime);
+  // Specify the date for which you want to get Unix timestamps
+  var year = 2023;
+  var month = 5; // Note: months are zero-based, so 5 represents June
+  var day = 9;
+
+  // Create two Date objects for the specified date
+  var startDate = new Date(year, month, day, 0, 0, 1);
+  var endDate = new Date(year, month, day, 23, 59, 59);
+
+  // Get the Unix timestamps in seconds
+  var startUnixTimestamp = Math.floor(startDate.getTime() / 1000);
+  var endUnixTimestamp = Math.floor(endDate.getTime() / 1000);
+
+  console.log(startUnixTimestamp, 'START');
+  console.log(endUnixTimestamp, 'END');
+
+  const getOrder = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'GetOrderList',
+          controller: 'Admin',
+          pars: {
+            TOKEN: token,
+            ADMIN_ID: uid,
+            START_DATE: startUnixTimestamp,
+            END_DATE: endUnixTimestamp
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      // dispatch(setSubPackets(responseData.data))
+      // localStorage.setItem(responseData, 'DATA')
+      console.log(responseData, 'Sub Packets')
+      if (responseData.status == 'success') {
+        console.log(responseData, 'DATA')
+      } else {
+        alert('მონაცემები არასწორია')
+      }
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  useEffect(() => {
+    getOrder()
+  }, [])
+
+  useEffect(() => {
+    console.log(startDaten, 'DTAE')
+  }, [startDaten])
+
 
   return (
     <Booking>
+      <DatePicker
+        selected={startDaten}
+        onChange={(date) => setStartDate(date)}
+        dateFormat="yyyy/MM/dd"
+      />
       {sortedArray.map((val, idx) => {
         return (
           <div className="booking_card" key={idx}>

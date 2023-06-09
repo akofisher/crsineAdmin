@@ -10,6 +10,7 @@ import Loyout from '../Loyout'
 import './Booking.css'
 
 export default function Booking(props) {
+
   return (
     <Loyout>
       <div className="page_container">

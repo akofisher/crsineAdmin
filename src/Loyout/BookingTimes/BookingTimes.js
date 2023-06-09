@@ -20,6 +20,12 @@ export default function BookingTimes() {
   const token = getCookie('token')
   const uid = getCookie('uid')
 
+  // const response = 'Fri Jun 09 2023 15:41:57 GMT+0400 (Georgia Standard Time)';
+  // const datee = new Date(response);
+  // const timestamp = datee.getTime();
+
+  // console.log(timestamp);
+
   const fetchTime = async () => {
     try {
       const url = API
@@ -97,6 +103,7 @@ export default function BookingTimes() {
   }, [])
 
   const PickADate = useCallback((val) => {
+    console.log(val, 'DTE')
     let i = ' '
     let s = ':'
     let D = String(val).indexOf(' ')

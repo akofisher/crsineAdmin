@@ -66,7 +66,7 @@ export default function Login() {
     // adminLogin(user, password)
   }
 
-  useEffect(() => {}, [user, password])
+  useEffect(() => { }, [user, password])
 
   return (
     <div className="login-container">
