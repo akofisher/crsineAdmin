@@ -1,0 +1,17 @@
+.time_picker_container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.date_row {
+  display: flex;
+  align-items: center;
+}
+
+.date_text {
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}

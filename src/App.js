@@ -4,6 +4,7 @@ import { default as AboutDetails } from './Loyout/AboutDetails/AboutDetails'
 import ActiveBookings from './Loyout/ActiveBookings/ActiveBookings'
 import BookingTimes from './Loyout/BookingTimes/BookingTimes'
 import CanceledBookings from './Loyout/CanceledBookings/CanceledBookings'
+import CarsForWash from './Loyout/CarsForWash/CarsForWash'
 import ContactDetails from './Loyout/ContactDetails/ContactDetails'
 import DoneBookings from './Loyout/DoneBookings/DoneBookings'
 import ExtraServices from './Loyout/ExtraServices/ExtraServices'
@@ -21,6 +22,7 @@ import {
   ACTIVE_BOOKINGS,
   BOOKING_TIMES,
   CANCELED_BOOKINGS,
+  CARS_FOR_WASH,
   CONTACT_DETAILS,
   DONE_BOOKINGS,
   LOGIN,
@@ -47,6 +49,17 @@ function App() {
               // <Suspense fallback={<Loader />}>
               <PrivateRoute redirectTo={LOGIN}>
                 <ActiveBookings />
+              </PrivateRoute>
+              // </Suspense>
+            }
+          />
+          <Route
+            exact
+            path={CARS_FOR_WASH}
+            element={
+              // <Suspense fallback={<Loader />}>
+              <PrivateRoute redirectTo={LOGIN}>
+                <CarsForWash />
               </PrivateRoute>
               // </Suspense>
             }

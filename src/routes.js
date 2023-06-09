@@ -1,6 +1,7 @@
 export const LOGIN = '/'
 export const PASS_RECOVERY = '/recovery'
 export const BOOKINGS = '/bookings'
+export const CARS_FOR_WASH = '/cars_for_wash'
 export const BOOKING_TIMES = '/booking_times'
 export const CONTACT_DETAILS = '/contact_details'
 export const ABOUT_DETAILS = '/about_details'

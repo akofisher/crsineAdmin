@@ -5,6 +5,7 @@ import {
   ACTIVE_BOOKINGS,
   BOOKING_TIMES,
   CANCELED_BOOKINGS,
+  CARS_FOR_WASH,
   CONTACT_DETAILS,
   DONE_BOOKINGS,
   NEWS_DETAILS,
@@ -31,6 +32,16 @@ export default function SideBar() {
         to={ACTIVE_BOOKINGS}
       >
         ჯავშნები
+      </Link>
+      <Link
+        className={
+          window.location.pathname == CARS_FOR_WASH
+            ? 'active-nav-links'
+            : 'nav-links'
+        }
+        to={CARS_FOR_WASH}
+      >
+        გასარეცხი ავტომობილები
       </Link>
       <Link
         className={
