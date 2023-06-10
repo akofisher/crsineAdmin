@@ -37,7 +37,7 @@ export default function BookingTimes() {
         body: JSON.stringify({
           ApiMethod: 'GetTimeList',
           controller: 'Services',
-          // pars: { TYPE_ID: '1' },
+          pars: '',
         }),
       }
       const responseData = await api.fetchData(url, options)

@@ -22,10 +22,7 @@ export default function SideBar() {
     <div className="sideBar">
       <Link
         className={
-          window.location.pathname == ACTIVE_BOOKINGS ||
-          window.location.pathname == PROCESS_BOOKINGS ||
-          window.location.pathname == DONE_BOOKINGS ||
-          window.location.pathname == CANCELED_BOOKINGS
+          window.location.pathname == ACTIVE_BOOKINGS
             ? 'active-nav-links'
             : 'nav-links'
         }
@@ -35,7 +32,10 @@ export default function SideBar() {
       </Link>
       <Link
         className={
-          window.location.pathname == CARS_FOR_WASH
+          window.location.pathname == CARS_FOR_WASH ||
+            window.location.pathname == PROCESS_BOOKINGS ||
+            window.location.pathname == DONE_BOOKINGS ||
+            window.location.pathname == CANCELED_BOOKINGS
             ? 'active-nav-links'
             : 'nav-links'
         }

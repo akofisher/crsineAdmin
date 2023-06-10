@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   ACTIVE_BOOKINGS,
   CANCELED_BOOKINGS,
+  CARS_FOR_WASH,
   DONE_BOOKINGS,
   PROCESS_BOOKINGS,
 } from '../../routes'
@@ -17,11 +18,11 @@ export default function Booking(props) {
         <div className="booking_nav_container">
           <Link
             className={
-              window.location.pathname == ACTIVE_BOOKINGS
+              window.location.pathname == CARS_FOR_WASH
                 ? 'active_booking_links'
                 : 'booking_links'
             }
-            to={ACTIVE_BOOKINGS}
+            to={CARS_FOR_WASH}
           >
             აქტიური
           </Link>
