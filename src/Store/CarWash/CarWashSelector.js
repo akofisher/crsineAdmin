@@ -4,3 +4,4 @@ export const selectCarTypes = (state) => state.carTypes.carTypes
 export const selectPackets = (state) => state.packets.packets
 export const selectSubPackets = (state) => state.subPackets.subPackets
 export const selectServices = (state) => state.services.services
+export const selectBookings = (state) => state.bookings.bookings

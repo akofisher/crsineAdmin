@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import {
   default as about,
+  default as bookings,
   default as carTypes,
   default as packets,
   default as services,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   packets,
   subPackets,
   services,
+  bookings,
 })
 
 export default rootReducer

@@ -1,6 +1,7 @@
 import {
   REMOVE_ADDRESS,
   SET_ABOUT,
+  SET_BOOKINGS,
   SET_CAR_TYPES,
   SET_PACKETS,
   SET_SERVICES,
@@ -15,6 +16,7 @@ const initialState = {
   packets: [],
   subPackets: [],
   services: [],
+  bookings: [],
 }
 
 export default function addressReducer(state = initialState, action) {
@@ -58,6 +60,13 @@ export default function addressReducer(state = initialState, action) {
       return {
         ...state,
         services: action.payload,
+      }
+      break
+
+    case SET_BOOKINGS:
+      return {
+        ...state,
+        bookings: action.payload,
       }
       break
 

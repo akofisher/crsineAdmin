@@ -1,6 +1,7 @@
 import {
   REMOVE_ADDRESS,
   SET_ABOUT,
+  SET_BOOKINGS,
   SET_CAR_TYPES,
   SET_PACKETS,
   SET_SERVICES,
@@ -47,6 +48,12 @@ export const setServices = (services) => {
   return {
     type: SET_SERVICES,
     payload: services,
+  }
+}
+export const setBookings = (bookings) => {
+  return {
+    type: SET_BOOKINGS,
+    payload: bookings,
   }
 }
 
