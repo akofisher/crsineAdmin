@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { API } from '../../API'
-import Logo from '../../Img/restLogo.jpg'
+import { getCookie } from '../../Cookies'
 import { setAbout } from '../../Store/CarWash/CarWashActCreat'
-import { contactDetails } from '../../data'
+import { selectAbout } from '../../Store/CarWash/CarWashSelector'
 import api from '../../useApiCall'
 import Loyout from '../Loyout'
 import './ContactDetails.css'
@@ -12,6 +12,15 @@ export default function ContactDetails() {
   const handleSubmit = () => {}
   const dispatch = useDispatch()
   const [error, setError] = useState('')
+  const [name, setName] = useState(0)
+  const [email, setEmail] = useState(0)
+  const [address, setAddress] = useState(0)
+  const [phone, setPhone] = useState(0)
+  const [instagram, setInstagram] = useState(0)
+  const [facebook, setFacebook] = useState(0)
+  let token = getCookie('token')
+  let uid = getCookie('uid')
+  const CONTACT = useSelector(selectAbout)
 
   const fetchContactDetails = async () => {
     try {
@@ -24,11 +33,47 @@ export default function ContactDetails() {
         body: JSON.stringify({
           ApiMethod: 'GetContactInfo',
           controller: 'Services',
-          // pars: { TYPE_ID: '1' },
+          pars: '',
         }),
       }
       const responseData = await api.fetchData(url, options)
       dispatch(setAbout(responseData.data))
+      console.log(responseData.data, 'Contact Info')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+  const editContactDetails = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'UpdateContactInfo',
+          controller: 'Admin',
+          pars: {
+            CONTACT_NAME: name !== 0 ? name : CONTACT.CONTACT_NAME,
+            ADDRESS: address !== 0 ? address : CONTACT.ADDRESS,
+            PHONE: phone !== 0 ? phone : CONTACT.PHONE,
+            FACEBOOK: facebook !== 0 ? facebook : CONTACT.FACEBOOK,
+            INSTAGRAM: instagram !== 0 ? instagram : CONTACT.INSTAGRAM,
+            EMAIL: email !== 0 ? email : CONTACT.EMAIL,
+            ADMIN_ID: uid,
+            TOKEN: token,
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      console.log(responseData, 'DATA')
+      if (responseData.status == 'success') {
+        window.location.reload()
+      } else {
+        alert('დაფიქსირდა შეცდომა')
+        window.location.reload()
+      }
       console.log(responseData.data, 'Contact Info')
     } catch (error) {
       setError(error.message)
@@ -47,116 +92,118 @@ export default function ContactDetails() {
             <p className="contact_container_header">არსებული დეტალები</p>
             <div className="rows">
               <p className="contact_title">Brand Name:</p>
-              <p className="contact_detail">{contactDetails.brandName}</p>
+              <p className="contact_detail">{CONTACT.CONTACT_NAME}</p>
             </div>
             <div className="rows">
               <p className="contact_title">Address:</p>
-              <p className="contact_detail">{contactDetails.brandAddress}</p>
+              <p className="contact_detail">{CONTACT.ADDRESS}</p>
             </div>
             <div className="rows">
               <p className="contact_title">Email:</p>
-              <p className="contact_detail">{contactDetails.email}</p>
+              <p className="contact_detail">{CONTACT.EMAIL}</p>
             </div>
             <div className="rows">
               <p className="contact_title">Phone:</p>
-              <p className="contact_detail">{contactDetails.phone}</p>
+              <p className="contact_detail">{CONTACT.PHONE}</p>
             </div>
             <div className="rows">
               <p className="contact_title">Instagram:</p>
-              <p className="contact_detail">{contactDetails.instagram}</p>
+              <p className="contact_detail">{CONTACT.INSTAGRAM}</p>
             </div>
             <div className="rows">
               <p className="contact_title">Facebook:</p>
-              <p className="contact_detail">{contactDetails.facebook}</p>
-            </div>
-            <div className="rows">
-              <p className="contact_title">Brand Logo:</p>
-              <p className="contact_detail">{contactDetails.brandLogo}</p>
-              <img src={Logo} alt="Logo" className="brandLogo" />
+              <p className="contact_detail">{CONTACT.FACEBOOK}</p>
             </div>
           </div>
+
           <div className="contact_right_container">
             <p className="contact_container_header">განაახლე დეტალები</p>
-            <form onSubmit={() => handleSubmit()} className="contact-form">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                editContactDetails()
+              }}
+              className="contact-form"
+            >
               <div className="contact-inp-cont">
-                <label className="label" htmlFor="userName">
+                <label className="label" htmlFor="Name">
                   ბრენდის სახელი
                 </label>
                 <input
-                  id="userName"
-                  name="userName"
+                  id="Name"
+                  name="Name"
                   type="text"
-                  onChange={(val) => console.log()}
+                  onChange={(val) => setName(val.target.value)}
                   variant="outlined"
                   label="მომხმარებელი"
                   className="user-input"
                 />
               </div>
               <div className="contact-inp-cont">
-                <label className="label" htmlFor="password">
+                <label className="label" htmlFor="address">
                   შეიყვანეთ მისამართი
                 </label>
                 <input
-                  id="userName"
-                  name="userName"
+                  id="address"
+                  name="address"
                   type="text"
-                  onChange={(val) => console.log()}
+                  onChange={(val) => setAddress(val.target.value)}
                   variant="outlined"
                   label="მომხმარებელი"
                   className="user-input"
                 />
               </div>
               <div className="contact-inp-cont">
-                <label className="label" htmlFor="password">
+                <label className="label" htmlFor="email">
                   შეიყვანეთ ელ-ფოსტა
                 </label>
                 <input
-                  id="userName"
-                  name="userName"
+                  id="email"
+                  name="email"
                   type="text"
-                  onChange={(val) => console.log()}
+                  onChange={(val) => setEmail(val.target.value)}
                   variant="outlined"
                   label="მომხმარებელი"
                   className="user-input"
                 />
               </div>
               <div className="contact-inp-cont">
-                <label className="label" htmlFor="password">
+                <label className="label" htmlFor="phone">
                   შეიყვანეთ მობილური ნომერი
                 </label>
                 <input
-                  id="userName"
-                  name="userName"
+                  id="phone"
+                  name="phone"
                   type="text"
-                  onChange={(val) => console.log()}
+                  onChange={(val) => setPhone(val.target.value)}
                   variant="outlined"
                   label="მომხმარებელი"
                   className="user-input"
                 />
               </div>
               <div className="contact-inp-cont">
-                <label className="label" htmlFor="password">
+                <label className="label" htmlFor="instagram">
                   შეიყვანეთ Instagram ლინკი
                 </label>
                 <input
-                  id="userName"
-                  name="userName"
+                  id="instagram"
+                  name="instagram"
                   type="text"
-                  onChange={(val) => console.log()}
+                  onChange={(val) => setInstagram(val.target.value)}
                   variant="outlined"
                   label="მომხმარებელი"
                   className="user-input"
                 />
               </div>
               <div className="contact-inp-cont">
-                <label className="label" htmlFor="password">
+                <label className="label" htmlFor="facebook">
                   შეიყვანეთ Facebook ლინკი
                 </label>
                 <input
-                  id="userName"
-                  name="userName"
+                  id="facebook"
+                  name="facebook"
                   type="text"
-                  onChange={(val) => console.log()}
+                  onChange={(val) => setFacebook(val.target.value)}
                   variant="outlined"
                   label="მომხმარებელი"
                   className="user-input"
@@ -166,24 +213,6 @@ export default function ContactDetails() {
               <button className="submit-btn" type="submit">
                 შეცვლა
               </button>
-              <div className="contact-inp-cont-logo">
-                <label className="label" htmlFor="password">
-                  ატვირთეთ ლოგოს ფოტო
-                </label>
-                <input
-                  id="userName"
-                  name="userName"
-                  type="file"
-                  onChange={(val) => console.log()}
-                  variant="outlined"
-                  label="მომხმარებელი"
-                  className="user-input"
-                />
-
-                <button className="submit-btn" type="button">
-                  ლოგოს დამატება
-                </button>
-              </div>
             </form>
           </div>
         </div>

@@ -137,6 +137,11 @@ export default function BookingTimes() {
       // dispatch(setTimes(responseData.data))
       if (responseData.status == 'success') {
         // window.location.reload()
+        fetchTime()
+        setEditing({
+          id: '00',
+          edit: false,
+        })
         console.log(responseData, 'EDITING')
       } else {
       }
