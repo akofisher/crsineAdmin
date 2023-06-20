@@ -11,21 +11,40 @@ export default function AboutDetails() {
   const [photo1, setPhoto1] = useState('')
   const [photo2, setPhoto2] = useState('')
   const [photo3, setPhoto3] = useState('')
+  const [format1, setFormat1] = useState('')
+  const [format2, setFormat2] = useState('')
+  const [format3, setFormat3] = useState('')
   const [aboutUsText, setAboutUsText] = useState('')
+
+  const isFileTypeValid = (file) => {
+    const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg']
+    return allowedTypes.includes(file.type)
+  }
+
+  const getFileFormat = (filename) => {
+    const parts = filename.split('.')
+    return parts[parts.length - 1].toUpperCase()
+  }
 
   const handleFileChange1 = (event) => {
     const file = event.target.files[0]
     setFile1(file)
 
-    if (file) {
+    if (file && isFileTypeValid(file)) {
+      const format = getFileFormat(file.name)
+      setFormat1(format)
       const reader = new FileReader()
-
       reader.onload = () => {
         const base64 = reader.result
         setPhoto1(base64)
       }
-
       reader.readAsDataURL(file)
+      console.log(photo1, 'PHOTO1')
+      console.log(format1, 'FORMAT1')
+    } else {
+      setFile1('')
+      setPhoto1('')
+      setFormat1('')
     }
   }
 
@@ -33,15 +52,21 @@ export default function AboutDetails() {
     const file = event.target.files[0]
     setFile2(file)
 
-    if (file) {
+    if (file && isFileTypeValid(file)) {
+      const format = getFileFormat(file.name)
+      setFormat2(format)
       const reader = new FileReader()
-
       reader.onload = () => {
         const base64 = reader.result
         setPhoto2(base64)
       }
-
       reader.readAsDataURL(file)
+      console.log(photo2, 'PHOTO2')
+      console.log(format2, 'FORMAT2')
+    } else {
+      setFile2('')
+      setPhoto2('')
+      setFormat2('')
     }
   }
 
@@ -49,15 +74,21 @@ export default function AboutDetails() {
     const file = event.target.files[0]
     setFile3(file)
 
-    if (file) {
+    if (file && isFileTypeValid(file)) {
+      const format = getFileFormat(file.name)
+      setFormat3(format)
       const reader = new FileReader()
-
       reader.onload = () => {
         const base64 = reader.result
         setPhoto3(base64)
       }
-
       reader.readAsDataURL(file)
+      console.log(photo3, 'PHOTO3')
+      console.log(format3, 'FORMAT3')
+    } else {
+      setFile3('')
+      setPhoto3('')
+      setFormat3('')
     }
   }
 
@@ -114,10 +145,10 @@ export default function AboutDetails() {
                   id="photo1"
                   name="photo1"
                   type="file"
-                  onChange={(val) => handleFileChange1(val.target.value)}
+                  onChange={(val) => handleFileChange1(val)}
                   variant="outlined"
                   className="user-input"
-                  accept="image/*"
+                  accept="image/png, image/jpeg, image/jpg"
                 />
               </div>
               <div className="contact-inp-cont">
@@ -128,10 +159,10 @@ export default function AboutDetails() {
                   id="photo2"
                   name="photo2"
                   type="file"
-                  onChange={(val) => handleFileChange2(val.target.value)}
+                  onChange={(val) => handleFileChange2(val)}
                   variant="outlined"
                   className="user-input"
-                  accept="image/*"
+                  accept="image/png, image/jpeg, image/jpg"
                 />
               </div>
 
@@ -143,10 +174,10 @@ export default function AboutDetails() {
                   id="photo3"
                   name="photo3"
                   type="file"
-                  onChange={(val) => handleFileChange3(val.target.value)}
+                  onChange={(val) => handleFileChange3(val)}
                   variant="outlined"
                   className="user-input"
-                  accept="image/*"
+                  accept="image/png, image/jpeg, image/jpg"
                 />
               </div>
 
