@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { API } from '../../API'
+import { getCookie } from '../../Cookies'
 import Logo from '../../Img/restLogo.jpg'
 import { aboutDetails, bannerPhoto } from '../../data'
 import api from '../../useApiCall'
@@ -18,6 +19,8 @@ export default function AboutDetails() {
   const [format3, setFormat3] = useState('')
   const [aboutUsText, setAboutUsText] = useState('')
   const [error, setError] = useState('')
+  let token = getCookie('token')
+  let uid = getCookie('uid')
 
   const isFileTypeValid = (file) => {
     const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg']
@@ -102,24 +105,28 @@ export default function AboutDetails() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
         body: JSON.stringify({
-          ApiMethod: 'AddSubPacket',
+          ApiMethod: 'AddAboutDetails',
           controller: 'Admin',
           pars: {
-            // TYPE_ID: type,
-            // PACKET_NAME: packetName,
-            // PACKET_PRICE: packetPrice,
-            // PACKET_TIME: packetTime,
-            // TOKEN: token,
-            // ADMIN_ID: uid,
+            ABOUT_TEXT: aboutUsText,
+            ABOUT_PHOTO1: photo1,
+            ABOUT_PHOTO1_FORMAT: format1,
+            ABOUT_PHOTO2: photo2,
+            ABOUT_PHOTO2_FORMAT: format2,
+            BANNER_PHOTO: photo3,
+            BANNER_PHOTO_FORMAT: format3,
+            TOKEN: token,
+            ADMIN_ID: uid,
           },
         }),
       }
       const responseData = await api.fetchData(url, options)
       // dispatch(setPackets(responseData.data))
       if (responseData.status == 'success') {
-        window.location.reload()
+        console.log(responseData, 'RESPONSE ABOUT')
       } else {
       }
     } catch (error) {
@@ -157,7 +164,13 @@ export default function AboutDetails() {
           </div>
           <div className="contact_right_container">
             <p className="contact_container_header">განაახლე დეტალები</p>
-            <form onSubmit={(e) => e.preventDefault()} className="contact-form">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                handleSubmit()
+              }}
+              className="contact-form"
+            >
               <div className="contact-inp-cont">
                 <label className="label" htmlFor="aboutText">
                   შეიყვანეთ ჩვენს შესახებ ტექსტი
