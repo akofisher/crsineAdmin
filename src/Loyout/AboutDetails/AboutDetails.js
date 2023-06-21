@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { API } from '../../API'
 import Logo from '../../Img/restLogo.jpg'
 import { aboutDetails, bannerPhoto } from '../../data'
+import api from '../../useApiCall'
 import Loyout from '../Loyout'
 import './AboutDetails.css'
 
@@ -15,6 +17,7 @@ export default function AboutDetails() {
   const [format2, setFormat2] = useState('')
   const [format3, setFormat3] = useState('')
   const [aboutUsText, setAboutUsText] = useState('')
+  const [error, setError] = useState('')
 
   const isFileTypeValid = (file) => {
     const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg']
@@ -92,7 +95,38 @@ export default function AboutDetails() {
     }
   }
 
-  const handleSubmit = () => {}
+  const handleSubmit = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'AddSubPacket',
+          controller: 'Admin',
+          pars: {
+            // TYPE_ID: type,
+            // PACKET_NAME: packetName,
+            // PACKET_PRICE: packetPrice,
+            // PACKET_TIME: packetTime,
+            // TOKEN: token,
+            // ADMIN_ID: uid,
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      // dispatch(setPackets(responseData.data))
+      if (responseData.status == 'success') {
+        window.location.reload()
+      } else {
+      }
+    } catch (error) {
+      setError(error.message)
+      console.log(error.message)
+    }
+  }
   return (
     <Loyout>
       <div className="page_container">

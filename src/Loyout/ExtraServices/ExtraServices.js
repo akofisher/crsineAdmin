@@ -3,6 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { API } from '../../API'
 import { getCookie } from '../../Cookies'
+import Delete from '../../Img/delete.png'
 import Edit from '../../Img/edit.png'
 import { setCarTypes, setSubPackets } from '../../Store/CarWash/CarWashActCreat'
 import {
@@ -93,6 +94,36 @@ export default function ExtraServices() {
       setError(error.message)
     }
   }
+
+  const deleteSubPackets = async (id) => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'DeleteSubPacket',
+          controller: 'Admin',
+          pars: {
+            PACKET_ID: id,
+            TOKEN: token,
+            ADMIN_ID: uid,
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      if (responseData.status == 'success') {
+        window.location.reload()
+      } else {
+      }
+    } catch (error) {
+      setError(error.message)
+      console.log(error.message)
+    }
+  }
+
   const addSubPackets = async () => {
     try {
       const url = API
@@ -208,7 +239,13 @@ export default function ExtraServices() {
                       <p className="date">{val.PACKET_NAME}</p>
                       <p className="date">{val.PACKET_TIME}</p>
                       <p className="date">{val.PACKET_PRICE}$</p>
-
+                      <img
+                        src={Delete}
+                        alt="delete"
+                        className="delete_btn"
+                        title="წაშლა"
+                        onClick={() => deleteSubPackets(val.UID)}
+                      />
                       <img
                         src={Edit}
                         alt="delete"
