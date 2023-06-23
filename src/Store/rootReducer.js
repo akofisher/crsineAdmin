@@ -3,8 +3,10 @@ import {
   default as about,
   default as bookings,
   default as carTypes,
+  default as news,
   default as packets,
   default as services,
+  default as sliderPhotos,
   default as subPackets,
   default as times,
 } from './CarWash/CarWashReducer.js'
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   subPackets,
   services,
   bookings,
+  news,
+  sliderPhotos,
 })
 
 export default rootReducer

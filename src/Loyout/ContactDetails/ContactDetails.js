@@ -18,6 +18,7 @@ export default function ContactDetails() {
   const [phone, setPhone] = useState(0)
   const [instagram, setInstagram] = useState(0)
   const [facebook, setFacebook] = useState(0)
+  const [aboutUsText, setAboutUsText] = useState(0)
   let token = getCookie('token')
   let uid = getCookie('uid')
   const CONTACT = useSelector(selectAbout)
@@ -61,6 +62,7 @@ export default function ContactDetails() {
             FACEBOOK: facebook !== 0 ? facebook : CONTACT.FACEBOOK,
             INSTAGRAM: instagram !== 0 ? instagram : CONTACT.INSTAGRAM,
             EMAIL: email !== 0 ? email : CONTACT.EMAIL,
+            ABOUT_TEXT: aboutUsText !== 0 ? aboutUsText : CONTACT.ABOUT_TEXT,
             ADMIN_ID: uid,
             TOKEN: token,
           },
@@ -113,6 +115,10 @@ export default function ContactDetails() {
             <div className="rows">
               <p className="contact_title">Facebook:</p>
               <p className="contact_detail">{CONTACT.FACEBOOK}</p>
+            </div>
+            <div className="rows">
+              <p className="contact_title">About us text:</p>
+              <p className="contact_detail">{CONTACT.ABOUT_TEXT}</p>
             </div>
           </div>
 
@@ -207,6 +213,25 @@ export default function ContactDetails() {
                   variant="outlined"
                   label="მომხმარებელი"
                   className="user-input"
+                />
+              </div>
+              <div className="contact-inp-cont">
+                <label className="label" htmlFor="aboutText">
+                  შეიყვანეთ ჩვენს შესახებ ტექსტი
+                </label>
+                <textarea
+                  id="aboutText"
+                  name="aboutText"
+                  type="text"
+                  onChange={(val) => {
+                    if (val.target.value.length > 500) {
+                      alert('დაშვებული სიმბოლოების რაოდენობა 500-ია')
+                    } else {
+                      setAboutUsText(val.target.value)
+                    }
+                  }}
+                  variant="outlined"
+                  className="textarea-user-input"
                 />
               </div>
 

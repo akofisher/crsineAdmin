@@ -1,0 +1,7 @@
+.news_img {
+  cursor: pointer;
+}
+
+.news_img:hover {
+  opacity: 0.6;
+}

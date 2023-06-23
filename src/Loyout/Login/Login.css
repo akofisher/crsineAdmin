@@ -58,6 +58,8 @@ input[type='tel'] {
   color: black;
   padding: 5px 8px;
   cursor: pointer;
+  margin-bottom: 20px;
+  height: 30px;
 }
 
 .login_header_text {
@@ -75,4 +77,5 @@ input[type='tel'] {
   padding: 5px 8px;
   cursor: pointer;
   margin-left: 10px;
+  height: 30px;
 }

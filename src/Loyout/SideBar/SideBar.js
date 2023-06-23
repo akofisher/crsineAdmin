@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ABOUT_DETAILS,
   ACTIVE_BOOKINGS,
   BOOKING_TIMES,
   CANCELED_BOOKINGS,
@@ -33,9 +32,9 @@ export default function SideBar() {
       <Link
         className={
           window.location.pathname == CARS_FOR_WASH ||
-            window.location.pathname == PROCESS_BOOKINGS ||
-            window.location.pathname == DONE_BOOKINGS ||
-            window.location.pathname == CANCELED_BOOKINGS
+          window.location.pathname == PROCESS_BOOKINGS ||
+          window.location.pathname == DONE_BOOKINGS ||
+          window.location.pathname == CANCELED_BOOKINGS
             ? 'active-nav-links'
             : 'nav-links'
         }
@@ -73,7 +72,7 @@ export default function SideBar() {
       >
         საკონტაქტო დეტალები
       </Link>
-      <Link
+      {/* <Link
         className={
           window.location.pathname == ABOUT_DETAILS
             ? 'active-nav-links'
@@ -82,7 +81,7 @@ export default function SideBar() {
         to={ABOUT_DETAILS}
       >
         ჩვენს შესახებ დეტალები
-      </Link>
+      </Link> */}
       <Link
         className={
           window.location.pathname == NEWS_DETAILS

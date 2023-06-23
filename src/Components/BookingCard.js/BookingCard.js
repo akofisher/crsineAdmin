@@ -19,7 +19,7 @@ export default function BookingCard({ val }) {
   const [isData, setIsData] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [startDate, setStartDate] = useState()
-
+  console.log(val, 'BOOKING CARD')
   const openModal = () => {
     if (isOpen) {
       setIsOpen(false)

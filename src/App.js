@@ -1,6 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
-import { default as AboutDetails } from './Loyout/AboutDetails/AboutDetails'
 import ActiveBookings from './Loyout/ActiveBookings/ActiveBookings'
 import BookingTimes from './Loyout/BookingTimes/BookingTimes'
 import CanceledBookings from './Loyout/CanceledBookings/CanceledBookings'
@@ -18,7 +17,6 @@ import SliderPhotos from './Loyout/SliderPhotos/SliderPhotos'
 import PrivateRoute from './PrivateRoute'
 import './reset.css'
 import {
-  ABOUT_DETAILS,
   ACTIVE_BOOKINGS,
   BOOKING_TIMES,
   CANCELED_BOOKINGS,
@@ -131,7 +129,7 @@ function App() {
               // </Suspense>
             }
           />
-          <Route
+          {/* <Route
             exact
             path={ABOUT_DETAILS}
             element={
@@ -141,7 +139,7 @@ function App() {
               </PrivateRoute>
               // </Suspense>
             }
-          />
+          /> */}
           <Route
             exact
             path={NEWS_DETAILS}
