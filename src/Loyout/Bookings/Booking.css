@@ -110,3 +110,17 @@
   background-color: lightgray;
   cursor: pointer;
 }
+
+.cancel {
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  padding: 2px 6px;
+  border-radius: 7px;
+  position: absolute;
+  right: 140px;
+  background-color: lightgray;
+  cursor: pointer;
+}

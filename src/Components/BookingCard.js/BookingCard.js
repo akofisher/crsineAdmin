@@ -267,6 +267,14 @@ export default function BookingCard({ val }) {
                 >
                   დამახსოვრება
                 </button>
+                <button
+                  onClick={() => {
+                    window.location.reload()
+                  }}
+                  className="cancel"
+                >
+                  გაუქმება
+                </button>
               </>
             ) : (
               <>
