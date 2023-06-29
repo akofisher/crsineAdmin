@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useDispatch, useSelector } from 'react-redux'
 import { API } from '../../API'
 import { getCookie } from '../../Cookies'
+import { setSubPackets } from '../../Store/CarWash/CarWashActCreat'
+import { selectSubPackets } from '../../Store/CarWash/CarWashSelector'
 import {
   ACTIVE_BOOKINGS,
   CANCELED_BOOKINGS,
@@ -22,6 +25,8 @@ export default function BookingCard({ val }) {
   const [isOpen, setIsOpen] = useState(false)
   const [startDate, setStartDate] = useState()
   const [editServices, setEditServices] = useState(false)
+  const dispatch = useDispatch()
+  const SUB_PACKS = useSelector(selectSubPackets)
   const openModal = () => {
     if (isOpen) {
       setIsOpen(false)
@@ -123,6 +128,36 @@ export default function BookingCard({ val }) {
     return startUnixTimestamp
   }
 
+  const fetchSubPackets = async () => {
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'GetSubPackets',
+          controller: 'Services',
+          pars: { TYPE_ID: '1' },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      if (responseData.status == 'success') {
+        dispatch(setSubPackets(responseData.data))
+      } else {
+      }
+
+      console.log(responseData.data, 'Sub Packets')
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchSubPackets()
+  }, [])
+
   return (
     <>
       <div className="booking_card">
@@ -147,33 +182,40 @@ export default function BookingCard({ val }) {
             <div className="edit_main">
               <div className="left_edit">
                 <p className="service_container_text">არსებული სერვისები</p>
-                {ser.length > 0
-                  ? ser.map((val, idx) => (
+
+                {val.SUB_PACKETS.length > 0 ? (
+                  val.SUB_PACKETS.map((v, idx) => {
+                    return (
                       <div className="extra_card" key={idx}>
-                        <p className="date"></p>
-                        <p className="date"></p>
-                        <p className="date">$</p>
+                        <p className="date">{v.PACKET_NAME}</p>
+                        <p className="date">{v.PACKET_TIME}</p>
+                        <p className="date">{v.PACKET_PRICE}$</p>
                         <button onClick={() => null} className="card_btn">
                           წაშლა
                         </button>
                       </div>
-                    ))
-                  : null}
+                    )
+                  })
+                ) : (
+                  <p className="isNotData">მონაცემები არ მოიძებნა</p>
+                )}
               </div>
               <div className="right_edit">
                 <p className="service_container_text">სხვა სერვისები</p>
-                {ser.length > 0
-                  ? ser.map((val, idx) => (
-                      <div className="extra_card" key={idx}>
-                        <p className="date"></p>
-                        <p className="date"></p>
-                        <p className="date">$</p>
-                        <button onClick={() => null} className="card_btn">
-                          დამატება
-                        </button>
-                      </div>
-                    ))
-                  : null}
+                {SUB_PACKS.length > 0 ? (
+                  SUB_PACKS.map((v, idx) => (
+                    <div className="extra_card" key={idx}>
+                      <p className="date">{v.PACKET_NAME}</p>
+                      <p className="date">{v.PACKET_TIME}</p>
+                      <p className="date">{v.PACKET_PRICE}$</p>
+                      <button onClick={() => null} className="card_btn">
+                        დამატება
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p className="isNotData">მონაცემები არ მოიძებნა</p>
+                )}
               </div>
             </div>
           </div>
