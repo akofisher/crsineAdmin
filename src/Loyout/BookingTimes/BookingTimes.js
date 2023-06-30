@@ -76,7 +76,6 @@ export default function BookingTimes() {
         dispatch(setTimes(responseData.data))
         setLoading(false)
       } else {
-        alert(responseData.data)
       }
     } catch (error) {
       setError(error.message)

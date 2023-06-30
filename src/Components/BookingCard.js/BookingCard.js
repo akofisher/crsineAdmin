@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { API } from '../../API'
 import { getCookie } from '../../Cookies'
-import { setSubPackets } from '../../Store/CarWash/CarWashActCreat'
-import { selectSubPackets } from '../../Store/CarWash/CarWashSelector'
 import {
   ACTIVE_BOOKINGS,
   CANCELED_BOOKINGS,
@@ -25,8 +23,8 @@ export default function BookingCard({ val }) {
   const [isOpen, setIsOpen] = useState(false)
   const [startDate, setStartDate] = useState()
   const [editServices, setEditServices] = useState(false)
+  const [subPacks, setSubPacks] = useState('')
   const dispatch = useDispatch()
-  const SUB_PACKS = useSelector(selectSubPackets)
   const openModal = () => {
     if (isOpen) {
       setIsOpen(false)
@@ -139,12 +137,12 @@ export default function BookingCard({ val }) {
         body: JSON.stringify({
           ApiMethod: 'GetSubPackets',
           controller: 'Services',
-          pars: { TYPE_ID: '1' },
+          pars: { TYPE_ID: val.CAR_TYPE_ID },
         }),
       }
       const responseData = await api.fetchData(url, options)
       if (responseData.status == 'success') {
-        dispatch(setSubPackets(responseData.data))
+        setSubPacks(responseData.data)
       } else {
       }
 
@@ -202,8 +200,8 @@ export default function BookingCard({ val }) {
               </div>
               <div className="right_edit">
                 <p className="service_container_text">სხვა სერვისები</p>
-                {SUB_PACKS.length > 0 ? (
-                  SUB_PACKS.map((v, idx) => (
+                {subPacks.length > 0 ? (
+                  subPacks.map((v, idx) => (
                     <div className="extra_card" key={idx}>
                       <p className="date">{v.PACKET_NAME}</p>
                       <p className="date">{v.PACKET_TIME}</p>

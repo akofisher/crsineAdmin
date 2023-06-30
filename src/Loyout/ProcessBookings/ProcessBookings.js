@@ -174,7 +174,7 @@ export default function ProcessBookings() {
             გაფილტრე
           </button>
         </div>
-        {isData ? (
+        {isData && BOOKINGS.length > 0 ? (
           BOOKINGS.map((val, idx) => {
             return <BookingCard val={val} key={idx} />
           })

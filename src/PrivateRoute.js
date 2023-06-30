@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
-import { getCookie } from './Cookies.js'
+import { eraseCookie, getCookie } from './Cookies.js'
 
 const PrivateRoute = ({ children, redirectTo }) => {
   const STAFF = getCookie('staff')
@@ -9,34 +9,17 @@ const PrivateRoute = ({ children, redirectTo }) => {
   const UID = getCookie('uid')
   const USER = getCookie('user')
 
-  // useEffect(() => {
-  //   fetch(API, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       ApiMethod: 'UserTokenAuth',
-  //       controller: 'Customers',
-  //       pars: {
-  //         FRONT_TOKEN: TOKEN,
-  //       },
-  //     }),
-  //   }).then(db => {
-  //     db.json().then(json => {
-  //       if (json.status === 'success') {
-
-  //       } else if (json.status !== 'success') {
-  //         eraseCookie('MOB')
-  //         eraseCookie('EMAIL')
-  //         eraseCookie('UserName')
-  //         eraseCookie('User')
-  //         eraseCookie('TOKEN')
-  //         window.location.reload()
-  //       }
-  //     })
-  //   })
-  // }, [])
+  useEffect(() => {
+    if (STATUS && TOKEN && USER) {
+    } else {
+      eraseCookie('staff')
+      eraseCookie('status')
+      eraseCookie('token')
+      eraseCookie('uid')
+      eraseCookie('user')
+      window.location.reload()
+    }
+  }, [STATUS, TOKEN, USER])
 
   return STATUS && TOKEN && USER ? children : <Navigate to={redirectTo} />
 }

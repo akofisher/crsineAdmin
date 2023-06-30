@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker'
 import { useDispatch, useSelector } from 'react-redux'
 import { API } from '../../API'
 import BookingCard from '../../Components/BookingCard.js/BookingCard'
-import { getCookie } from '../../Cookies'
+import { eraseCookie, getCookie } from '../../Cookies'
 import { setBookings } from '../../Store/CarWash/CarWashActCreat'
 import { selectBookings } from '../../Store/CarWash/CarWashSelector'
 import api from '../../useApiCall'
@@ -133,6 +133,13 @@ export default function ActiveBookings() {
         console.log(responseData, 'DATA')
         setIsData(true)
         dispatch(setBookings(responseData.data))
+      } else if (responseData.data == 'invalid token') {
+        eraseCookie('staff')
+        eraseCookie('status')
+        eraseCookie('token')
+        eraseCookie('uid')
+        eraseCookie('user')
+        window.location.reload()
       } else {
         setIsData(false)
       }
@@ -173,7 +180,7 @@ export default function ActiveBookings() {
           </button>
         </div>
 
-        {isData ? (
+        {isData && BOOKINGS.length > 0 ? (
           BOOKINGS.map((val, idx) => {
             return <BookingCard val={val} key={idx} />
           })

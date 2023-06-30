@@ -80,7 +80,6 @@ export default function NewsDetails() {
       if (responseData.status == 'success') {
         dispatch(setNews(responseData.data))
       } else {
-        alert('დაფიქსირდა შეცდომა')
       }
       console.log(responseData.data, 'News')
     } catch (error) {

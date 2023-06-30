@@ -71,7 +71,6 @@ export default function SliderPhotos() {
         dispatch(setSliderPhotos(responseData.data))
         console.log(responseData, 'News')
       } else {
-        alert('დაფიქსირდა შეცდომა')
       }
       console.log(responseData.data, 'News')
     } catch (error) {
@@ -134,7 +133,6 @@ export default function SliderPhotos() {
           console.log(responseData, 'News')
           window.location.reload()
         } else {
-          alert('დაფიქსირდა შეცდომა')
         }
         console.log(responseData.data, 'News')
       } catch (error) {
@@ -159,7 +157,7 @@ export default function SliderPhotos() {
               {SLIDER_PHOTOS.length > 0 ? (
                 SLIDER_PHOTOS.map((val, idx) => {
                   return (
-                    <div key={val} className="slider_img">
+                    <div key={idx} className="slider_img">
                       <img
                         src={val.SLIDER_IMAGE}
                         alt=""
