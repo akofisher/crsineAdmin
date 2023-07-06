@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch } from 'react-redux'
@@ -24,6 +24,7 @@ export default function BookingCard({ val }) {
   const [startDate, setStartDate] = useState()
   const [editServices, setEditServices] = useState(false)
   const [subPacks, setSubPacks] = useState('')
+  const [editPrice, setEditPrice] = useState(val.ORDER_TOTAL)
   const dispatch = useDispatch()
   const openModal = () => {
     if (isOpen) {
@@ -33,6 +34,36 @@ export default function BookingCard({ val }) {
     }
   }
 
+  const elementRefs = useRef([]);
+
+  const handleDelete = (index) => {
+    if (elementRefs.current[index]) {
+      elementRefs.current[index].remove();
+    }
+  };
+
+  const addElementRef = (element) => {
+    if (element && !elementRefs.current.includes(element)) {
+      elementRefs.current.push(element);
+    }
+  };
+
+
+  const elementRefsNew = useRef([]);
+
+  const handleDeleteNew = (index) => {
+    if (elementRefsNew.current[index]) {
+      elementRefsNew.current[index].remove();
+    }
+  };
+
+  const addNewElementRef = (element) => {
+    if (element && !elementRefsNew.current.includes(element)) {
+      elementRefsNew.current.push(element);
+    }
+  };
+
+  console.log(val, 'orders')
   const changeStatus = async (id, status) => {
     try {
       const url = API
@@ -151,6 +182,93 @@ export default function BookingCard({ val }) {
       setError(error.message)
     }
   }
+  const AddSubPacketToOrder = async (ord, serd, oldP, newP) => {
+    console.log(Number(oldP) + Number(newP), 'NEW PRICE')
+    setEditPrice(Number(editPrice) + Number(newP))
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'AddSubPacketToOrder',
+          controller: 'Admin',
+          pars: {
+            ORDER_ID: ord,
+            SERVICE_ID: serd,
+            TOKEN: token,
+            ADMIN_ID: uid,
+            NEW_PRICE: Number(oldP) + Number(newP),
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      console.log(responseData, 'BEFORE')
+      if (responseData.status == 'success') {
+        console.log(responseData, 'SUCCESS')
+      } else {
+        console.log(responseData, 'FAIL')
+      }
+
+
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  useEffect(() => {
+
+  }, [editPrice])
+
+
+
+  const DeleteSubPacketFromOrder = async (ord, serd, oldP, newP) => {
+    console.log(Number(editPrice) - Number(newP), 'DEL PRICE')
+    setEditPrice(Number(editPrice) - Number(newP))
+    try {
+      const url = API
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ApiMethod: 'RemSubPacketFromOrder',
+          controller: 'Admin',
+          pars: {
+            ORDER_ID: ord,
+            SERVICE_ID: serd,
+            TOKEN: token,
+            ADMIN_ID: uid,
+            NEW_PRICE: Number(editPrice) - Number(newP),
+          },
+        }),
+      }
+      const responseData = await api.fetchData(url, options)
+      console.log(responseData, 'BEFORE')
+      if (responseData.status == 'success') {
+        console.log(responseData, 'SUCCESS')
+      } else {
+        console.log(responseData, 'FAIL')
+      }
+
+
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+
+  const filteredSubPacks = subPacks.length > 0 ? subPacks.filter((subPack) => {
+    return !val.SUB_PACKETS.some((valSubPack) => valSubPack.PACKET_NAME === subPack.PACKET_NAME);
+  })
+    : ''
+
+
+
+
 
   useEffect(() => {
     fetchSubPackets()
@@ -160,21 +278,21 @@ export default function BookingCard({ val }) {
     <>
       <div className="booking_card">
         {editServices &&
-        val.ORDER_STATUS == '0' &&
-        window.location.pathname == ACTIVE_BOOKINGS ? (
+          val.ORDER_STATUS == '0' &&
+          window.location.pathname == ACTIVE_BOOKINGS ? (
           <div className="service_edit">
             <div className="edit_header">
               <button
                 onClick={() => setEditServices(false)}
                 className="cancel_btn"
               >
-                დასრულება
+                უკან დაბრუნება
               </button>
               <button
-                onClick={() => setEditServices(false)}
+                onClick={() => window.location.reload()}
                 className="cancel_btn"
               >
-                გაუქმება
+                დასრულება
               </button>
             </div>
             <div className="edit_main">
@@ -184,11 +302,14 @@ export default function BookingCard({ val }) {
                 {val.SUB_PACKETS.length > 0 ? (
                   val.SUB_PACKETS.map((v, idx) => {
                     return (
-                      <div className="extra_card" key={idx}>
+                      <div ref={addElementRef} className="extra_card" key={idx}>
                         <p className="date">{v.PACKET_NAME}</p>
                         <p className="date">{v.PACKET_TIME}</p>
                         <p className="date">{v.PACKET_PRICE}$</p>
-                        <button onClick={() => null} className="card_btn">
+                        <button onClick={async () => {
+                          await DeleteSubPacketFromOrder(val.UID, v.UID, val.ORDER_TOTAL, v.PACKET_PRICE)
+                          handleDelete(idx)
+                        }} className="card_btn">
                           წაშლა
                         </button>
                       </div>
@@ -200,13 +321,16 @@ export default function BookingCard({ val }) {
               </div>
               <div className="right_edit">
                 <p className="service_container_text">სხვა სერვისები</p>
-                {subPacks.length > 0 ? (
-                  subPacks.map((v, idx) => (
-                    <div className="extra_card" key={idx}>
+                {filteredSubPacks.length > 0 ? (
+                  filteredSubPacks.map((v, idx) => (
+                    <div ref={addNewElementRef} className="extra_card" key={idx}>
                       <p className="date">{v.PACKET_NAME}</p>
                       <p className="date">{v.PACKET_TIME}</p>
                       <p className="date">{v.PACKET_PRICE}$</p>
-                      <button onClick={() => null} className="card_btn">
+                      <button onClick={async () => {
+                        await AddSubPacketToOrder(val.UID, v.UID, val.ORDER_TOTAL, v.PACKET_PRICE)
+                        handleDeleteNew(idx)
+                      }} className="card_btn">
                         დამატება
                       </button>
                     </div>
@@ -216,11 +340,12 @@ export default function BookingCard({ val }) {
                 )}
               </div>
             </div>
+            <p className='editPrice'>{editPrice}$</p>
           </div>
         ) : (
           <>
             {window.location.pathname == CANCELED_BOOKINGS ||
-            window.location.pathname == DONE_BOOKINGS ? null : window.location
+              window.location.pathname == DONE_BOOKINGS ? null : window.location
                 .pathname == CARS_FOR_WASH ? (
               <div className="bookings_buttons_container">
                 <button
@@ -317,7 +442,7 @@ export default function BookingCard({ val }) {
                 })}
               </div>
               {val.ORDER_STATUS == '0' &&
-              window.location.pathname == ACTIVE_BOOKINGS ? (
+                window.location.pathname == ACTIVE_BOOKINGS ? (
                 <button
                   onClick={() => setEditServices(true)}
                   className="edit_time"
@@ -353,7 +478,7 @@ export default function BookingCard({ val }) {
             <div className="detail_container">
               <p className="detail_name">ჯავშნის შესასრულებელი დრო/თარიღი -</p>
               {val.ORDER_STATUS == '0' &&
-              window.location.pathname == ACTIVE_BOOKINGS ? (
+                window.location.pathname == ACTIVE_BOOKINGS ? (
                 isOpen ? (
                   <>
                     <DatePicker
