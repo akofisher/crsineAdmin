@@ -13,6 +13,7 @@ export default function Header() {
           eraseCookie('token')
           eraseCookie('uid')
           eraseCookie('user')
+          localStorage.removeItem('newOrder')
           window.location.reload()
         }}
       >

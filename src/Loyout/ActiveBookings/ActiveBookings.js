@@ -67,6 +67,15 @@ export default function ActiveBookings() {
   //   console.log(formattedDate)
   // }
 
+  const playAlertVoice = () => {
+    const speechSynthesis = window.speechSynthesis
+    const message = new SpeechSynthesisUtterance(
+      'Hey Admin ! We received new order !',
+    )
+    message.lang = 'en-US'
+    speechSynthesis.speak(message)
+  }
+
   const takeTimeStampForSendStart = (val) => {
     const currentDate = new Date(val)
 
@@ -106,6 +115,7 @@ export default function ActiveBookings() {
   const getOrder = async () => {
     let st = takeTimeStampForSendStart(start)
     let en = takeTimeStampForSendEnd(end)
+    let newOrd = localStorage.getItem('newOrder')
 
     try {
       const url = API
@@ -133,15 +143,26 @@ export default function ActiveBookings() {
         console.log(responseData, 'DATA')
         setIsData(true)
         dispatch(setBookings(responseData.data))
+        if (
+          newOrd !== null &&
+          newOrd !== undefined &&
+          responseData.data.length > newOrd
+        ) {
+          playAlertVoice()
+        } else {
+          localStorage.setItem('newOrder', responseData.data.length)
+        }
       } else if (responseData.data == 'invalid token') {
         eraseCookie('staff')
         eraseCookie('status')
         eraseCookie('token')
         eraseCookie('uid')
         eraseCookie('user')
+        localStorage.removeItem('newOrder')
         window.location.reload()
       } else {
         setIsData(false)
+        localStorage.removeItem('newOrder')
       }
     } catch (error) {
       setError(error.message)
@@ -150,6 +171,10 @@ export default function ActiveBookings() {
 
   useEffect(() => {
     getOrder()
+    const intervalId = setInterval(getOrder, 5 * 60 * 1000)
+    return () => {
+      clearInterval(intervalId)
+    }
   }, [])
   return (
     <Loyout>
