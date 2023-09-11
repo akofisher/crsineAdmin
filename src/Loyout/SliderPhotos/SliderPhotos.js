@@ -43,8 +43,6 @@ export default function SliderPhotos() {
         setPhoto(base64)
       }
       reader.readAsDataURL(file)
-      console.log(photo, 'PHOTO1')
-      console.log(format, 'FORMAT1')
     } else {
       setFile('')
       setPhoto('')
@@ -69,10 +67,8 @@ export default function SliderPhotos() {
       const responseData = await api.fetchData(url, options)
       if (responseData.status == 'success') {
         dispatch(setSliderPhotos(responseData.data))
-        console.log(responseData, 'News')
       } else {
       }
-      console.log(responseData.data, 'News')
     } catch (error) {
       setError(error.message)
     }
@@ -99,11 +95,9 @@ export default function SliderPhotos() {
       const responseData = await api.fetchData(url, options)
       if (responseData.status == 'success') {
         window.location.reload()
-        console.log(responseData, 'News')
       } else {
         alert('დაფიქსირდა შეცდომა')
       }
-      console.log(responseData.data, 'News')
     } catch (error) {
       setError(error.message)
     }
@@ -130,11 +124,9 @@ export default function SliderPhotos() {
         }
         const responseData = await api.fetchData(url, options)
         if (responseData.status == 'success') {
-          console.log(responseData, 'News')
           window.location.reload()
         } else {
         }
-        console.log(responseData.data, 'News')
       } catch (error) {
         setError(error.message)
       }

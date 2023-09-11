@@ -47,6 +47,17 @@
   cursor: pointer;
 }
 
+.card_btn_done {
+  border: none;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  padding: 5px;
+  cursor: pointer;
+}
+
 .card_btn,
 .cancel_btn:hover {
   opacity: 0.7;

@@ -53,8 +53,6 @@ export default function NewsDetails() {
         setPhoto(base64)
       }
       reader.readAsDataURL(file)
-      console.log(photo, 'PHOTO1')
-      console.log(format, 'FORMAT1')
     } else {
       setFile('')
       setPhoto('')
@@ -81,14 +79,12 @@ export default function NewsDetails() {
         dispatch(setNews(responseData.data))
       } else {
       }
-      console.log(responseData.data, 'News')
     } catch (error) {
       setError(error.message)
     }
   }
 
   const AddService = async () => {
-    console.log(photo, 'BASE64')
     try {
       const url = API
       const options = {
@@ -114,14 +110,12 @@ export default function NewsDetails() {
         window.location.reload()
       } else {
       }
-      console.log(responseData, 'ADD')
     } catch (error) {
       setError(error.message)
     }
   }
 
   const EditService = async (id) => {
-    console.log(photo, 'BASE64')
     try {
       const url = API
       const options = {
@@ -146,13 +140,11 @@ export default function NewsDetails() {
         window.location.reload()
       } else {
       }
-      console.log(responseData, 'ADD')
     } catch (error) {
       setError(error.message)
     }
   }
   const EditServicePhoto = async (id) => {
-    console.log(photo, 'BASE64')
     try {
       const url = API
       const options = {
@@ -176,13 +168,11 @@ export default function NewsDetails() {
         window.location.reload()
       } else {
       }
-      console.log(responseData, 'ADD')
     } catch (error) {
       setError(error.message)
     }
   }
   const DeleteService = async (id) => {
-    console.log(photo, 'BASE64')
     try {
       const url = API
       const options = {
@@ -205,7 +195,6 @@ export default function NewsDetails() {
         window.location.reload()
       } else {
       }
-      console.log(responseData, 'ADD')
     } catch (error) {
       setError(error.message)
     }
@@ -215,7 +204,7 @@ export default function NewsDetails() {
     fetchServiceList()
   }, [])
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => { }
 
   return (
     <Loyout>

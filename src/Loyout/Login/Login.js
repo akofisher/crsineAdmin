@@ -31,9 +31,6 @@ export default function Login() {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      // dispatch(setSubPackets(responseData.data))
-      // localStorage.setItem(responseData, 'DATA')
-      console.log(responseData, 'Sub Packets')
       if (responseData.status == 'success') {
         loginSucces(responseData.data)
       } else {
@@ -78,7 +75,7 @@ export default function Login() {
         }}
         className="login-form"
       >
-        <p>სისტემაში შესვლა</p>
+        <p className="label">სისტემაში შესვლა</p>
         <div className="inp-cont">
           <label className="label" htmlFor="userName">
             შეიყვანეთ მომხმარებელი

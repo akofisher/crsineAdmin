@@ -57,7 +57,6 @@ export default function ExtraServices() {
         setLoading(true)
       }
 
-      console.log(responseData.data, 'Car Types')
     } catch (error) {
       setError(error.message)
     }
@@ -89,7 +88,6 @@ export default function ExtraServices() {
         setLoading(true)
       }
 
-      console.log(responseData.data, 'Sub Packets')
     } catch (error) {
       setError(error.message)
     }
@@ -120,7 +118,6 @@ export default function ExtraServices() {
       }
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
     }
   }
 
@@ -153,7 +150,6 @@ export default function ExtraServices() {
       }
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
     }
   }
   const editSubPackets = async () => {
@@ -181,7 +177,6 @@ export default function ExtraServices() {
       const responseData = await api.fetchData(url, options)
       // dispatch(setPackets(responseData.data))
       if (responseData.status == 'success') {
-        console.log(responseData, 'RESP ON EDIT')
         setEditable({
           edit: false,
           editName: '',
@@ -201,7 +196,6 @@ export default function ExtraServices() {
       }
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
     }
   }
 

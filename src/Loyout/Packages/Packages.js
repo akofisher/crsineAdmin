@@ -20,7 +20,7 @@ export default function Packages() {
   const uid = getCookie('uid')
   const CARTYPES = useSelector(selectCarTypes)
   const PACKETS = useSelector(selectPackets)
-  const [type, setType] = useState(1)
+  const [type, setType] = useState('1')
   const [loading, setLoading] = useState(true)
   const [packetName, setPacketName] = useState('')
   const [packetPrice, setPacketPrice] = useState('')
@@ -31,7 +31,15 @@ export default function Packages() {
     editTime: '',
     editPrice: '',
     editId: '',
+    editPack1: '__',
+    editPack2: '__',
+    editPack3: '__',
+    editPack4: '__',
   })
+  const [pack1, setPack1] = useState('__')
+  const [pack2, setPack2] = useState('__')
+  const [pack3, setPack3] = useState('__')
+  const [pack4, setPack4] = useState('__')
 
   const fetchCarTypes = async () => {
     setLoading(true)
@@ -56,7 +64,6 @@ export default function Packages() {
         setLoading(true)
       }
 
-      console.log(responseData.data, 'Car Types')
     } catch (error) {
       setError(error.message)
     }
@@ -87,7 +94,6 @@ export default function Packages() {
       }
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
     }
   }
 
@@ -109,6 +115,10 @@ export default function Packages() {
             PACKET_TIME: packetTime,
             TOKEN: token,
             ADMIN_ID: uid,
+            PACK1: pack1,
+            PACK2: pack2,
+            PACK3: pack3,
+            PACK4: pack4,
           },
         }),
       }
@@ -120,7 +130,6 @@ export default function Packages() {
       }
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
     }
   }
   const editPackets = async () => {
@@ -142,6 +151,10 @@ export default function Packages() {
             PACKET_ID: editable.editId,
             TOKEN: token,
             ADMIN_ID: uid,
+            PACK1: pack1,
+            PACK2: pack2,
+            PACK3: pack3,
+            PACK4: pack4,
           },
         }),
       }
@@ -154,6 +167,10 @@ export default function Packages() {
           editTime: '',
           editPrice: '',
           editId: '',
+          editPack1: '__',
+          editPack2: '__',
+          editPack3: '__',
+          editPack4: '__',
         })
         window.location.reload()
       } else {
@@ -163,11 +180,14 @@ export default function Packages() {
           editTime: '',
           editPrice: '',
           editId: '',
+          editPack1: '__',
+          editPack2: '__',
+          editPack3: '__',
+          editPack4: '__',
         })
       }
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
     }
   }
   const fetchPackets = async () => {
@@ -193,7 +213,6 @@ export default function Packages() {
         setLoading(true)
       }
 
-      console.log(responseData, 'Packetsssss')
     } catch (error) {
       setError(error.message)
     }
@@ -257,6 +276,10 @@ export default function Packages() {
                           editTime: val.PACKET_TIME,
                           editPrice: val.PACKET_PRICE,
                           editId: val.UID,
+                          editPack1: val.PACK1,
+                          editPack2: val.PACK2,
+                          editPack3: val.PACK3,
+                          editPack4: val.PACK4,
                         })
                       }
                     />
@@ -316,7 +339,7 @@ export default function Packages() {
               </div>
               <div className="contact-inp-cont">
                 <label className="label" htmlFor="password">
-                  ჩაწერეთ პაკეტი დრო {editable.edit ? editable.editTime : null}
+                  ჩაწერეთ პაკეტის დრო {editable.edit ? editable.editTime : null}
                 </label>
                 <input
                   id="userName"
@@ -329,6 +352,71 @@ export default function Packages() {
                   required
                 />
               </div>
+
+
+              {/* //პაკეტი რას მოიცავს */}
+
+
+              <div className="contact-inp-cont">
+                <label className="label" htmlFor="pack1">
+                  რას მოიცავს პაკეტი N1 {editable.edit ? editable.editPack1 : null}
+                </label>
+                <input
+                  id="pack1"
+                  name="pack1"
+                  type="text"
+                  onChange={(val) => setPack1(val.target.value)}
+                  variant="outlined"
+                  label="pack1"
+                  className="user-input"
+                />
+              </div>
+              <div className="contact-inp-cont">
+                <label className="label" htmlFor="pack2">
+                  რას მოიცავს პაკეტი N2 {editable.edit ? editable.editPack2 : null}
+                </label>
+                <input
+                  id="pack2"
+                  name="pack2"
+                  type="text"
+                  onChange={(val) => setPack2(val.target.value)}
+                  variant="outlined"
+                  label="pack2"
+                  className="user-input"
+                />
+              </div>
+              <div className="contact-inp-cont">
+                <label className="label" htmlFor="pack3">
+                  რას მოიცავს პაკეტი N3 {editable.edit ? editable.editPack3 : null}
+                </label>
+                <input
+                  id="pack3"
+                  name="pack3"
+                  type="text"
+                  onChange={(val) => setPack3(val.target.value)}
+                  variant="outlined"
+                  label="pack3"
+                  className="user-input"
+                />
+              </div>
+              <div className="contact-inp-cont">
+                <label className="label" htmlFor="pack4">
+                  რას მოიცავს პაკეტი N4 {editable.edit ? editable.editPack4 : null}
+                </label>
+                <input
+                  id="pack4"
+                  name="pack4"
+                  type="text"
+                  onChange={(val) => setPack4(val.target.value)}
+                  variant="outlined"
+                  label="pack4"
+                  className="user-input"
+                />
+              </div>
+
+              {/* //პაკეტი რას მოიცავს */}
+
+
               <div className="flex_btns">
                 <button className="submit-btn" type="submit">
                   {editable.edit ? 'შეცვლა' : 'დამატება'}

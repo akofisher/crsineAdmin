@@ -9,7 +9,7 @@ import Loyout from '../Loyout'
 import './ContactDetails.css'
 
 export default function ContactDetails() {
-  const handleSubmit = () => {}
+  const handleSubmit = () => { }
   const dispatch = useDispatch()
   const [error, setError] = useState('')
   const [name, setName] = useState(0)
@@ -39,7 +39,6 @@ export default function ContactDetails() {
       }
       const responseData = await api.fetchData(url, options)
       dispatch(setAbout(responseData.data))
-      console.log(responseData.data, 'Contact Info')
     } catch (error) {
       setError(error.message)
     }
@@ -69,14 +68,12 @@ export default function ContactDetails() {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      console.log(responseData, 'DATA')
       if (responseData.status == 'success') {
         window.location.reload()
       } else {
         alert('დაფიქსირდა შეცდომა')
         window.location.reload()
       }
-      console.log(responseData.data, 'Contact Info')
     } catch (error) {
       setError(error.message)
     }

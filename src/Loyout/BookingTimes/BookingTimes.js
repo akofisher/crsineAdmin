@@ -46,11 +46,9 @@ export default function BookingTimes() {
     let hours = hrs
     let minutes = min
 
-    let startDaten = new Date(year, month, day, hours + 4, minutes, 0)
+    let startDaten = new Date(year, month, day + 1, hours - 1, minutes, 0)
 
     let startUnixTimestamp = Math.floor(startDaten.getTime() / 1000)
-    // setStartDate(startUnixTimestamp)
-    console.log(startUnixTimestamp, 'START NEW')
     return startUnixTimestamp
   }
 
@@ -70,8 +68,6 @@ export default function BookingTimes() {
         }),
       }
       const responseData = await api.fetchData(url, options)
-
-      console.log(responseData, 'Times')
       if (responseData.status == 'success') {
         dispatch(setTimes(responseData.data))
         setLoading(false)
@@ -83,7 +79,6 @@ export default function BookingTimes() {
   }
   const addTime = async () => {
     let time = takeTimeStampForSendStart(startDate)
-    console.log(time, 'START DATE')
     try {
       const url = API
       const options = {
@@ -141,7 +136,6 @@ export default function BookingTimes() {
           id: '00',
           edit: false,
         })
-        console.log(responseData, 'EDITING')
       } else {
       }
     } catch (error) {
@@ -156,7 +150,6 @@ export default function BookingTimes() {
   }, [])
 
   const PickADate = useCallback((val) => {
-    console.log(val, 'DTE')
     let i = ' '
     let s = ':'
     let D = String(val).indexOf(' ')

@@ -116,14 +116,11 @@ export default function AboutDetails() {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      // dispatch(setPackets(responseData.data))
       if (responseData.status == 'success') {
-        console.log(responseData, 'RESPONSE ABOUT')
       } else {
       }
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
     }
   }
   return (

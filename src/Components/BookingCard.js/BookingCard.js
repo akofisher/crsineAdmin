@@ -25,6 +25,11 @@ export default function BookingCard({ val }) {
   const [editServices, setEditServices] = useState(false)
   const [subPacks, setSubPacks] = useState('')
   const [editPrice, setEditPrice] = useState(val.ORDER_TOTAL)
+  const [done, setDone] = useState({
+    id: '',
+    uid: '',
+    doneOrNo: false,
+  })
   const dispatch = useDispatch()
   const openModal = () => {
     if (isOpen) {
@@ -63,7 +68,7 @@ export default function BookingCard({ val }) {
     }
   };
 
-  console.log(val, 'orders')
+
   const changeStatus = async (id, status) => {
     try {
       const url = API
@@ -84,11 +89,10 @@ export default function BookingCard({ val }) {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      // dispatch(setSubPackets(responseData.data))
-      // localStorage.setItem(responseData, 'DATA')
-      console.log(responseData, 'Sub Packets')
+
+
       if (responseData.status == 'success') {
-        console.log(responseData, 'STATUS CHANGING')
+
         setIsData(true)
       } else {
         setIsData(false)
@@ -119,12 +123,8 @@ export default function BookingCard({ val }) {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      // dispatch(setSubPackets(responseData.data))
-      // localStorage.setItem(responseData, 'DATA')
-      console.log(responseData, 'Sub Packets')
-      if (responseData.status == 'success') {
-        console.log(responseData, 'STATUS CHANGING')
 
+      if (responseData.status == 'success') {
         openModal()
         window.location.reload()
       } else {
@@ -152,8 +152,7 @@ export default function BookingCard({ val }) {
     let startDaten = new Date(year, month, day, hours + 4, minutes, 0)
 
     let startUnixTimestamp = Math.floor(startDaten.getTime() / 1000)
-    // setStartDate(startUnixTimestamp)
-    console.log(startUnixTimestamp, 'START NEW')
+
     return startUnixTimestamp
   }
 
@@ -177,14 +176,13 @@ export default function BookingCard({ val }) {
       } else {
       }
 
-      console.log(responseData.data, 'Sub Packets')
     } catch (error) {
       setError(error.message)
     }
   }
   const AddSubPacketToOrder = async (ord, serd, oldP, newP) => {
-    console.log(Number(oldP) + Number(newP), 'NEW PRICE')
     setEditPrice(Number(editPrice) + Number(newP))
+
     try {
       const url = API
       const options = {
@@ -205,11 +203,13 @@ export default function BookingCard({ val }) {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      console.log(responseData, 'BEFORE')
       if (responseData.status == 'success') {
-        console.log(responseData, 'SUCCESS')
+        setDone({
+          id: serd,
+          uid: ord,
+          doneOrNo: true,
+        })
       } else {
-        console.log(responseData, 'FAIL')
       }
 
 
@@ -225,8 +225,8 @@ export default function BookingCard({ val }) {
 
 
   const DeleteSubPacketFromOrder = async (ord, serd, oldP, newP) => {
-    console.log(Number(editPrice) - Number(newP), 'DEL PRICE')
     setEditPrice(Number(editPrice) - Number(newP))
+
     try {
       const url = API
       const options = {
@@ -247,11 +247,13 @@ export default function BookingCard({ val }) {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      console.log(responseData, 'BEFORE')
       if (responseData.status == 'success') {
-        console.log(responseData, 'SUCCESS')
+        setDone({
+          id: serd,
+          uid: ord,
+          doneOrNo: true,
+        })
       } else {
-        console.log(responseData, 'FAIL')
       }
 
 
@@ -306,12 +308,20 @@ export default function BookingCard({ val }) {
                         <p className="date">{v.PACKET_NAME}</p>
                         <p className="date">{v.PACKET_TIME}</p>
                         <p className="date">{v.PACKET_PRICE}$</p>
-                        <button onClick={async () => {
-                          await DeleteSubPacketFromOrder(val.UID, v.UID, val.ORDER_TOTAL, v.PACKET_PRICE)
-                          handleDelete(idx)
-                        }} className="card_btn">
-                          წაშლა
-                        </button>
+                        {done.id == v.UID && done.doneOrNo == true && done.uid == val.UID ? (
+                          <button onClick={() => {
+                          }} className="card_btn_done">
+                            წაიშალა
+                          </button>
+                        ) : (
+                          <button onClick={async () => {
+                            await DeleteSubPacketFromOrder(val.UID, v.UID, val.ORDER_TOTAL, v.PACKET_PRICE)
+                            handleDelete(idx)
+                          }} className="card_btn">
+                            წაშლა
+                          </button>
+                        )}
+
                       </div>
                     )
                   })
@@ -327,12 +337,20 @@ export default function BookingCard({ val }) {
                       <p className="date">{v.PACKET_NAME}</p>
                       <p className="date">{v.PACKET_TIME}</p>
                       <p className="date">{v.PACKET_PRICE}$</p>
-                      <button onClick={async () => {
-                        await AddSubPacketToOrder(val.UID, v.UID, val.ORDER_TOTAL, v.PACKET_PRICE)
-                        handleDeleteNew(idx)
-                      }} className="card_btn">
-                        დამატება
-                      </button>
+                      {done.id == v.UID && done.doneOrNo == true && done.uid == val.UID ? (
+                        <button onClick={() => {
+                        }} className="card_btn_done">
+                          დაემატა
+                        </button>
+                      ) : (
+                        <button onClick={async () => {
+                          await AddSubPacketToOrder(val.UID, v.UID, val.ORDER_TOTAL, v.PACKET_PRICE)
+                          handleDeleteNew(idx)
+                        }} className="card_btn">
+                          დამატება
+                        </button>
+                      )}
+
                     </div>
                   ))
                 ) : (
@@ -391,7 +409,7 @@ export default function BookingCard({ val }) {
               <div className="bookings_buttons_container">
                 {val.ORDER_STATUS == '1' ? (
                   <button
-                    onClick={() => console.log('ok')}
+
                     className="bookings_button_start"
                     type="button"
                   >
@@ -399,7 +417,7 @@ export default function BookingCard({ val }) {
                   </button>
                 ) : val.ORDER_STATUS == '2' ? (
                   <button
-                    onClick={() => console.log('ok')}
+
                     className="bookings_button_done"
                     type="button"
                   >
@@ -407,7 +425,7 @@ export default function BookingCard({ val }) {
                   </button>
                 ) : val.ORDER_STATUS == '3' ? (
                   <button
-                    onClick={() => console.log('ok')}
+
                     className="bookings_button_cancel"
                     type="button"
                   >

@@ -81,8 +81,6 @@ export default function CarsForWash() {
     let startDate = new Date(year, month, day, 0, 0, 1)
 
     let startUnixTimestamp = Math.floor(startDate.getTime() / 1000)
-    // setStartDate(startUnixTimestamp)
-    console.log(startUnixTimestamp, 'START NEW')
     return startUnixTimestamp
   }
 
@@ -99,8 +97,6 @@ export default function CarsForWash() {
     let endDate = new Date(year, month, day, 23, 59, 59)
 
     let endUnixTimestamp = Math.floor(endDate.getTime() / 1000)
-    // setEndDate(endUnixTimestamp)
-    console.log(endUnixTimestamp, 'END NEW')
     return endUnixTimestamp
   }
 
@@ -128,11 +124,7 @@ export default function CarsForWash() {
         }),
       }
       const responseData = await api.fetchData(url, options)
-      // dispatch(setSubPackets(responseData.data))
-      // localStorage.setItem(responseData, 'DATA')
-      console.log(responseData, 'Sub Packets')
       if (responseData.status == 'success') {
-        console.log(responseData, 'DATA')
         dispatch(setBookings(responseData.data))
         setIsData(true)
       } else {
